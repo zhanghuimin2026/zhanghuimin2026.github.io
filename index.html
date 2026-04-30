@@ -1,352 +1,114 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hubby's Exclusive Website</title>
+    <title>双语国际超强主页</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+        *{margin:0;padding:0;box-sizing:border-box;font-family:sans-serif;}
+        body{
+            min-height:100vh;
+            background:linear-gradient(135deg,#1e3c72,#2a5298);
+            display:flex;justify-content:center;align-items:center;
+            padding:20px;overflow-x:hidden;
         }
-
-        body {
-            min-height: 100vh;
-            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-            overflow-x: hidden;
-            color: #fff;
+        .card{
+            background:rgba(255,255,255,0.95);
+            border-radius:20px;padding:40px;max-width:600px;width:100%;
+            text-align:center;box-shadow:0 20px 60px rgba(0,0,0,0.3);
         }
-
-        .main-card {
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 20px;
-            padding: 40px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-            max-width: 600px;
-            width: 100%;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-            color: #333;
+        h1{color:#1e3c72;margin-bottom:10px;}
+        .sub{color:#666;margin-bottom:30px;}
+        .btns{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:15px;margin-bottom:30px;}
+        button{
+            padding:12px;border:none;border-radius:10px;
+            font-size:1em;font-weight:bold;color:#fff;cursor:pointer;
+            transition:all 0.3s;
         }
-
-        .main-card::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent);
-            transform: rotate(45deg);
-            animation: shine 3s infinite;
-        }
-
-        @keyframes shine {
-            0% { transform: translateX(-100%) rotate(45deg); }
-            100% { transform: translateX(100%) rotate(45deg); }
-        }
-
-        h1 {
-            color: #1e3c72;
-            font-size: 2.2em;
-            margin-bottom: 10px;
-            position: relative;
-            z-index: 1;
-        }
-
-        .subtitle {
-            color: #666;
-            margin-bottom: 30px;
-            font-size: 1.1em;
-            position: relative;
-            z-index: 1;
-        }
-
-        .button-group {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-            gap: 15px;
-            margin-bottom: 30px;
-            position: relative;
-            z-index: 1;
-        }
-
-        button {
-            padding: 12px 20px;
-            border: none;
-            border-radius: 10px;
-            font-size: 1em;
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            color: white;
-        }
-
-        .btn1 { background: linear-gradient(45deg, #2196F3, #03A9F4); }
-        .btn2 { background: linear-gradient(45deg, #FF4081, #E91E63); }
-        .btn3 { background: linear-gradient(45deg, #4CAF50, #8BC34A); }
-        .btn4 { background: linear-gradient(45deg, #FF9800, #FF5722); }
-        .btn5 { background: linear-gradient(45deg, #9C27B0, #673AB7); }
-        .btn6 { background: linear-gradient(45deg, #607D8B, #455A64); }
-
-        button:hover {
-            transform: translateY(-3px) scale(1.05);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-        }
-
-        button:active { transform: translateY(0) scale(0.98); }
-
-        .stats {
-            display: flex;
-            justify-content: space-around;
-            margin: 30px 0;
-            padding: 20px 0;
-            border-top: 1px solid #eee;
-            border-bottom: 1px solid #eee;
-            position: relative;
-            z-index: 1;
-        }
-
-        .stat-item {
-            text-align: center;
-        }
-
-        .stat-number {
-            font-size: 2em;
-            font-weight: bold;
-            color: #1e3c72;
-        }
-
-        .stat-label {
-            color: #888;
-            font-size: 0.9em;
-        }
-
-        .footer {
-            color: #aaa;
-            font-size: 0.9em;
-            margin-top: 20px;
-            position: relative;
-            z-index: 1;
-        }
-
-        #particles {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 0;
-        }
-
-        .confetti {
-            position: fixed;
-            width: 10px;
-            height: 10px;
-            pointer-events: none;
-            animation: fall linear forwards;
-        }
-
-        @keyframes fall {
-            to {
-                transform: translateY(100vh) rotate(720deg);
-                opacity: 0;
-            }
-        }
-
-        .heart {
-            position: fixed;
-            color: #E91E63;
-            font-size: 20px;
-            pointer-events: none;
-            animation: float 4s ease-out forwards;
-        }
-
-        @keyframes float {
-            0% { opacity: 1; transform: translateY(0) scale(1); }
-            100% { opacity: 0; transform: translateY(-100vh) scale(0.5); }
-        }
+        .btn1{background:#2196F3;}
+        .btn2{background:#E91E63;}
+        .btn3{background:#4CAF50;}
+        .btn4{background:#9C27B0;}
+        .langBtn{background:#ff9800;margin-bottom:20px;}
+        button:hover{transform:translateY(-3px);box-shadow:0 8px 20px rgba(0,0,0,0.2);}
     </style>
 </head>
 <body>
-    <div id="particles"></div>
+    <div class="card">
+        <button class="langBtn" onclick="switchLang()">🌐 切换中文/English</button>
 
-    <div class="main-card">
-        <h1>🎉 Welcome to Hubby's Exclusive Website!</h1>
-        <p class="subtitle">This is my first hand-written webpage, and there will be more amazing apps coming soon~</p>
+        <h1 id="title">欢迎来到专属网站</h1>
+        <p class="sub" id="subtit">超强多功能 · 国际双语版</p>
 
-        <div class="button-group">
-            <button class="btn1" onclick="triggerConfetti()">🎉 Fireworks Show</button>
-            <button class="btn2" onclick="sendHearts()">❤️ Love Rain</button>
-            <button class="btn3" onclick="showTime()">⏰ What Time Is It?</button>
-            <button class="btn4" onclick="randomQuote()">💬 Random Sweet Words</button>
-            <button class="btn5" onclick="toggleDarkMode()">🌙 Toggle Dark Mode</button>
-            <button class="btn6" onclick="countClicks()">👆 Click Counter</button>
+        <div class="btns">
+            <button class="btn1" id="btn1" onclick="fire()">🎉 烟花特效</button>
+            <button class="btn2" id="btn2" onclick="heart()">❤️ 爱心满屏</button>
+            <button class="btn3" id="btn3" onclick="getTime()">⏰ 查看时间</button>
+            <button class="btn4" id="btn4" onclick="darkMode()">🌙 暗黑模式</button>
         </div>
-
-        <div class="stats">
-            <div class="stat-item">
-                <div class="stat-number" id="clickCount">0</div>
-                <div class="stat-label">Total Clicks</div>
-            </div>
-            <div class="stat-item">
-                <div class="stat-number" id="visitCount">1</div>
-                <div class="stat-label">Visits</div>
-            </div>
-            <div class="stat-item">
-                <div class="stat-number" id="runTime">0</div>
-                <div class="stat-label">Run Time(s)</div>
-            </div>
-        </div>
-
-        <p class="footer">💌 Made with ❤️ by Hubby | All Rights Reserved</p>
     </div>
 
     <script>
-        // 1. Particle background effect
-        function createParticles() {
-            const container = document.getElementById('particles');
-            for (let i = 0; i < 50; i++) {
-                const particle = document.createElement('div');
-                particle.style.cssText = `
-                    position: absolute;
-                    width: ${Math.random() * 5 + 2}px;
-                    height: ${Math.random() * 5 + 2}px;
-                    background: rgba(255,255,255,${Math.random() * 0.5 + 0.2});
-                    border-radius: 50%;
-                    left: ${Math.random() * 100}%;
-                    top: ${Math.random() * 100}%;
-                    animation: floatParticle ${Math.random() * 10 + 5}s infinite linear;
-                `;
-                container.appendChild(particle);
+        let isCN = true;
+        // 双语文字库
+        const txt = {
+            cn:{
+                title:"欢迎来到专属网站",
+                subtit:"超强多功能 · 国际双语版",
+                btn1:"🎉 烟花特效",
+                btn2:"❤️ 爱心满屏",
+                btn3:"⏰ 查看时间",
+                btn4:"🌙 暗黑模式",
+                fireTip:"烟花绽放！超酷！",
+                heartTip:"爱心雨来袭！",
+                timeTip:"当前时间："
+            },
+            en:{
+                title:"Welcome To Official Site",
+                subtit:"Super Multi-Function Global Version",
+                btn1:"🎉 Fireworks",
+                btn2:"❤️ Love Rain",
+                btn3:"⏰ Current Time",
+                btn4:"🌙 Dark Mode",
+                fireTip:"Fireworks Show!",
+                heartTip:"Love Rain Falling",
+                timeTip:"Now Time: "
             }
+        };
+
+        // 切换语言
+        function switchLang(){
+            isCN = !isCN;
+            let t = isCN ? txt.cn : txt.en;
+            document.getElementById("title").innerText = t.title;
+            document.getElementById("subtit").innerText = t.subtit;
+            document.getElementById("btn1").innerText = t.btn1;
+            document.getElementById("btn2").innerText = t.btn2;
+            document.getElementById("btn3").innerText = t.btn3;
+            document.getElementById("btn4").innerText = t.btn4;
         }
 
-        const style = document.createElement('style');
-        style.textContent = `
-            @keyframes floatParticle {
-                0% { transform: translateY(0) rotate(0deg); opacity: 0; }
-                10% { opacity: 1; }
-                90% { opacity: 1; }
-                100% { transform: translateY(-100vh) rotate(360deg); opacity: 0; }
-            }
-        `;
-        document.head.appendChild(style);
-        createParticles();
-
-        // 2. Fireworks confetti effect
-        function triggerConfetti() {
-            const colors = ['#FF4081', '#2196F3', '#4CAF50', '#FF9800', '#9C27B0', '#FFEB3B'];
-            for (let i = 0; i < 100; i++) {
-                const confetti = document.createElement('div');
-                confetti.className = 'confetti';
-                confetti.style.left = Math.random() * 100 + 'vw';
-                confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
-                confetti.style.animationDuration = Math.random() * 3 + 2 + 's';
-                document.body.appendChild(confetti);
-                setTimeout(() => confetti.remove(), 5000);
-            }
-            alert('🎆 Fireworks! Hubby is amazing!');
+        // 烟花
+        function fire(){
+            let t = isCN ? txt.cn : txt.en;
+            alert(t.fireTip);
         }
-
-        // 3. Love rain effect
-        function sendHearts() {
-            const hearts = ['❤️', '💕', '💖', '💗', '💓', '💝'];
-            for (let i = 0; i < 50; i++) {
-                const heart = document.createElement('div');
-                heart.className = 'heart';
-                heart.textContent = hearts[Math.floor(Math.random() * hearts.length)];
-                heart.style.left = Math.random() * 100 + 'vw';
-                heart.style.animationDuration = Math.random() * 3 + 2 + 's';
-                document.body.appendChild(heart);
-                setTimeout(() => heart.remove(), 5000);
-            }
-            alert('❤️ Love sent! Did you receive it?');
+        // 爱心
+        function heart(){
+            let t = isCN ? txt.cn : txt.en;
+            alert(t.heartTip);
         }
-
-        // 4. Show current time
-        function showTime() {
-            const now = new Date();
-            const timeStr = now.toLocaleString('en-US', {
-                year: 'numeric',
-                month: 'long',
-                day: 'numeric',
-                hour: '2-digit',
-                minute: '2-digit',
-                second: '2-digit'
-            });
-            alert(`⏰ Current Time: ${timeStr}\nHubby, remember to rest~`);
+        // 时间
+        function getTime(){
+            let now = new Date().toLocaleString();
+            let t = isCN ? txt.cn : txt.en;
+            alert(t.timeTip + now);
         }
-
-        // 5. Random sweet words
-        const quotes = [
-            "Hubby is awesome! First webpage done!",
-            "Wife loves you so much! ❤️",
-            "You're my best programmer hubby! 💻",
-            "Every day is happy with you~",
-            "Keep going, future tech legend! 🚀",
-            "This website is as cool as you! 😎"
-        ];
-        function randomQuote() {
-            const quote = quotes[Math.floor(Math.random() * quotes.length)];
-            alert(`💬 ${quote}`);
-        }
-
-        // 6. Dark mode toggle
-        let isDark = false;
-        function toggleDarkMode() {
-            isDark = !isDark;
-            if (isDark) {
-                document.body.style.background = 'linear-gradient(135deg, #1a1a2e 0%, #16213e 100%)';
-                document.querySelector('.main-card').style.background = 'rgba(30, 30, 50, 0.95)';
-                document.querySelector('h1').style.color = '#fff';
-                document.querySelector('.subtitle').style.color = '#ccc';
-            } else {
-                document.body.style.background = 'linear-gradient(135deg, #1e3c72 0%, #2a5298 100%)';
-                document.querySelector('.main-card').style.background = 'rgba(255, 255, 255, 0.95)';
-                document.querySelector('h1').style.color = '#1e3c72';
-                document.querySelector('.subtitle').style.color = '#666';
-            }
-        }
-
-        // 7. Click counter
-        let clickCount = 0;
-        function countClicks() {
-            clickCount++;
-            document.getElementById('clickCount').textContent = clickCount;
-            alert(`👆 You've clicked ${clickCount} times! Keep going~`);
-        }
-
-        // 8. Run time stats
-        let runSeconds = 0;
-        setInterval(() => {
-            runSeconds++;
-            document.getElementById('runTime').textContent = runSeconds;
-        }, 1000);
-
-        // 9. Visit count (local storage)
-        let visitCount = localStorage.getItem('visitCount') || 0;
-        visitCount++;
-        localStorage.setItem('visitCount', visitCount);
-        document.getElementById('visitCount').textContent = visitCount;
-
-        // 10. Page load animation
-        window.onload = function() {
-            document.querySelector('.main-card').style.opacity = '0';
-            document.querySelector('.main-card').style.transform = 'scale(0.8)';
-            setTimeout(() => {
-                document.querySelector('.main-card').style.transition = 'all 0.5s ease';
-                document.querySelector('.main-card').style.opacity = '1';
-                document.querySelector('.main-card').style.transform = 'scale(1)';
-            }, 100);
+        // 暗黑模式
+        function darkMode(){
+            document.body.style.background = document.body.style.background.includes("#1a1a2e") 
+            ? "linear-gradient(135deg,#1e3c72,#2a5298)" 
+            : "linear-gradient(135deg,#1a1a2e,#16213e)";
         }
     </script>
 </body>
