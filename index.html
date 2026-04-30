@@ -1,115 +1,173 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>双语国际超强主页</title>
-    <style>
-        *{margin:0;padding:0;box-sizing:border-box;font-family:sans-serif;}
-        body{
-            min-height:100vh;
-            background:linear-gradient(135deg,#1e3c72,#2a5298);
-            display:flex;justify-content:center;align-items:center;
-            padding:20px;overflow-x:hidden;
-        }
-        .card{
-            background:rgba(255,255,255,0.95);
-            border-radius:20px;padding:40px;max-width:600px;width:100%;
-            text-align:center;box-shadow:0 20px 60px rgba(0,0,0,0.3);
-        }
-        h1{color:#1e3c72;margin-bottom:10px;}
-        .sub{color:#666;margin-bottom:30px;}
-        .btns{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:15px;margin-bottom:30px;}
-        button{
-            padding:12px;border:none;border-radius:10px;
-            font-size:1em;font-weight:bold;color:#fff;cursor:pointer;
-            transition:all 0.3s;
-        }
-        .btn1{background:#2196F3;}
-        .btn2{background:#E91E63;}
-        .btn3{background:#4CAF50;}
-        .btn4{background:#9C27B0;}
-        .langBtn{background:#ff9800;margin-bottom:20px;}
-        button:hover{transform:translateY(-3px);box-shadow:0 8px 20px rgba(0,0,0,0.2);}
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>AI全球科技总站</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Microsoft YaHei,sans-serif;}
+body{background:#050914;color:#fff;overflow-x:hidden;}
+#matrix{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;opacity:0.18;}
+.wrap{position:relative;z-index:1;padding:30px 20px;max-width:850px;margin:auto;}
+.top-bar{text-align:right;margin-bottom:20px;}
+.lang-btn{background:linear-gradient(90deg,#00c6fb,#005bea);border:none;color:#fff;padding:7px 18px;border-radius:30px;font-size:15px;cursor:pointer;}
+.card{background:rgba(15,25,45,0.75);border:1px solid rgba(0,198,251,0.3);border-radius:22px;padding:35px;backdrop-filter:blur(8px);box-shadow:0 0 50px rgba(0,198,251,0.15);text-align:center;}
+.title{font-size:32px;background:linear-gradient(90deg,#00c6fb,#6ee7ff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:10px;}
+.desc{color:#a0b4d8;margin-bottom:30px;}
+.btns{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px;margin-bottom:35px;}
+.btn{border:1px solid rgba(0,198,251,0.4);background:transparent;color:#6ee7ff;padding:14px;border-radius:12px;font-size:15px;cursor:pointer;transition:0.3s;}
+.btn:hover{background:rgba(0,198,251,0.15);box-shadow:0 0 15px #00c6fb;transform:translateY(-2px);}
+/* AI聊天窗口 */
+.ai-box{margin-top:30px;border:1px solid rgba(0,198,251,0.3);border-radius:18px;overflow:hidden;background:rgba(10,18,35,0.6);}
+.ai-head{background:#005bea;padding:12px;text-align:center;font-weight:bold;}
+.ai-content{height:220px;padding:15px;text-align:left;overflow-y:auto;color:#cce4ff;}
+.ai-input{display:flex;}
+.ai-input input{flex:1;padding:12px;border:none;background:#0a1224;color:#fff;outline:none;}
+.ai-input button{background:#00c6fb;border:none;padding:12px 20px;color:#000;font-weight:bold;cursor:pointer;}
+.stat{display:flex;justify-content:space-around;margin:30px 0;}
+.stat-item{text-align:center;}
+.stat-num{font-size:28px;color:#00c6fb;font-weight:bold;}
+.stat-txt{color:#889ec2;font-size:14px;}
+</style>
 </head>
 <body>
-    <div class="card">
-        <button class="langBtn" onclick="switchLang()">🌐 切换中文/English</button>
-
-        <h1 id="title">欢迎来到专属网站</h1>
-        <p class="sub" id="subtit">超强多功能 · 国际双语版</p>
-
-        <div class="btns">
-            <button class="btn1" id="btn1" onclick="fire()">🎉 烟花特效</button>
-            <button class="btn2" id="btn2" onclick="heart()">❤️ 爱心满屏</button>
-            <button class="btn3" id="btn3" onclick="getTime()">⏰ 查看时间</button>
-            <button class="btn4" id="btn4" onclick="darkMode()">🌙 暗黑模式</button>
-        </div>
+<canvas id="matrix"></canvas>
+<div class="wrap">
+    <div class="top-bar">
+        <button class="lang-btn" onclick="switchLang()">🌐 中英文切换</button>
     </div>
 
-    <script>
-        let isCN = true;
-        // 双语文字库
-        const txt = {
-            cn:{
-                title:"欢迎来到专属网站",
-                subtit:"超强多功能 · 国际双语版",
-                btn1:"🎉 烟花特效",
-                btn2:"❤️ 爱心满屏",
-                btn3:"⏰ 查看时间",
-                btn4:"🌙 暗黑模式",
-                fireTip:"烟花绽放！超酷！",
-                heartTip:"爱心雨来袭！",
-                timeTip:"当前时间："
-            },
-            en:{
-                title:"Welcome To Official Site",
-                subtit:"Super Multi-Function Global Version",
-                btn1:"🎉 Fireworks",
-                btn2:"❤️ Love Rain",
-                btn3:"⏰ Current Time",
-                btn4:"🌙 Dark Mode",
-                fireTip:"Fireworks Show!",
-                heartTip:"Love Rain Falling",
-                timeTip:"Now Time: "
-            }
-        };
+    <div class="card">
+        <h1 class="title" id="title">AI 全球科技总站</h1>
+        <p class="desc" id="desc">超科技 · 超AI · 世界一流版本</p>
 
-        // 切换语言
-        function switchLang(){
-            isCN = !isCN;
-            let t = isCN ? txt.cn : txt.en;
-            document.getElementById("title").innerText = t.title;
-            document.getElementById("subtit").innerText = t.subtit;
-            document.getElementById("btn1").innerText = t.btn1;
-            document.getElementById("btn2").innerText = t.btn2;
-            document.getElementById("btn3").innerText = t.btn3;
-            document.getElementById("btn4").innerText = t.btn4;
-        }
+        <div class="btns">
+            <button class="btn" onclick="fireWork()" id="b1">🎆 科技烟花</button>
+            <button class="btn" onclick="darkMode()" id="b2">🌙 暗黑模式</button>
+            <button class="btn" onclick="showNowTime()" id="b3">⏰ 现在时间</button>
+            <button class="btn" onclick="clickAdd()" id="b4">👆 点击计数</button>
+        </div>
 
-        // 烟花
-        function fire(){
-            let t = isCN ? txt.cn : txt.en;
-            alert(t.fireTip);
-        }
-        // 爱心
-        function heart(){
-            let t = isCN ? txt.cn : txt.en;
-            alert(t.heartTip);
-        }
-        // 时间
-        function getTime(){
-            let now = new Date().toLocaleString();
-            let t = isCN ? txt.cn : txt.en;
-            alert(t.timeTip + now);
-        }
-        // 暗黑模式
-        function darkMode(){
-            document.body.style.background = document.body.style.background.includes("#1a1a2e") 
-            ? "linear-gradient(135deg,#1e3c72,#2a5298)" 
-            : "linear-gradient(135deg,#1a1a2e,#16213e)";
-        }
-    </script>
+        <div class="stat">
+            <div class="stat-item">
+                <div class="stat-num" id="c1">0</div>
+                <div class="stat-txt" id="t1">点击次数</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-num" id="c2">0</div>
+                <div class="stat-txt" id="t2">运行秒数</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-num" id="c3">1</div>
+                <div class="stat-txt" id="t3">访问次数</div>
+            </div>
+        </div>
+
+        <!-- AI聊天窗口 -->
+        <div class="ai-box">
+            <div class="ai-head" id="aiTitle">AI智能聊天助手</div>
+            <div class="ai-content" id="aiChat">
+AI：你好，我是内置AI助手，随时可以和我聊天！
+            </div>
+            <div class="ai-input">
+                <input type="text" id="aiMsg" placeholder="输入消息发给AI...">
+                <button onclick="sendAI()">发送</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+// 矩阵背景
+const c=document.getElementById("matrix");
+const ctx=c.getContext("2d");
+c.width=window.innerWidth;
+c.height=window.innerHeight;
+let str="01ABCDEFGHIJKLMNOPQRSTUVWXYZアイウエオカキクケコ";
+let fontSize=16;
+let col=c.width/fontSize;
+let drop=[];
+for(let i=0;i<col;i++)drop[i]=1;
+function draw(){
+    ctx.fillStyle="rgba(5,9,20,0.06)";
+    ctx.fillRect(0,0,c.width,c.height);
+    ctx.fillStyle="#00e5ff";
+    ctx.font=fontSize+"px monospace";
+    for(let i=0;i<drop.length;i++){
+        let ch=str[Math.floor(Math.random()*str.length)];
+        ctx.fillText(ch,i*fontSize,drop[i]*fontSize);
+        if(drop[i]*fontSize>c.height&&Math.random()>0.97)drop[i]=0;
+        drop[i]++;
+    }
+}
+setInterval(draw,40);
+window.onresize={()=>{c.width=window.innerWidth;c.height=window.innerHeight;}};
+
+// 双语
+let isCn=true;
+let lang={
+    cn:{
+        title:"AI 全球科技总站",desc:"超科技 · 超AI · 世界一流版本",
+        b1:"🎆 科技烟花",b2:"🌙 暗黑模式",b3:"⏰ 现在时间",b4:"👆 点击计数",
+        t1:"点击次数",t2:"运行秒数",t3:"访问次数",aiTitle:"AI智能聊天助手",
+        sendHint:"输入消息发给AI..."
+    },
+    en:{
+        title:"AI Global Tech Station",desc:"Super Tech · Super AI · World Class",
+        b1:"🎆 Fireworks",b2:"🌙 Dark Mode",b3:"⏰ Time",b4:"👆 Click Count",
+        t1:"Clicks",t2:"Run Time",t3:"Visits",aiTitle:"AI Chat Assistant",
+        sendHint:"Type message to AI..."
+    }
+};
+function switchLang(){
+    isCn=!isCn;let d=isCn?lang.cn:lang.en;
+    document.getElementById("title").innerText=d.title;
+    document.getElementById("desc").innerText=d.desc;
+    document.getElementById("b1").innerText=d.b1;
+    document.getElementById("b2").innerText=d.b2;
+    document.getElementById("b3").innerText=d.b3;
+    document.getElementById("b4").innerText=d.b4;
+    document.getElementById("t1").innerText=d.t1;
+    document.getElementById("t2").innerText=d.t2;
+    document.getElementById("t3").innerText=d.t3;
+    document.getElementById("aiTitle").innerText=d.aiTitle;
+    document.getElementById("aiMsg").placeholder=d.sendHint;
+}
+
+// 基础功能
+let clickNum=0;
+function clickAdd(){clickNum++;document.getElementById("c1").innerText=clickNum;}
+function showNowTime(){alert(new Date().toLocaleString());}
+function darkMode(){
+    let b=document.body;
+    b.style.background=b.style.background=="#050914"?"#000":"#050914";
+}
+function fireWork(){alert(isCn?"科技烟花已绽放 ✨":"Fireworks Ready ✨");}
+
+// 运行计时
+let runT=0;
+setInterval(()=>{runT++;document.getElementById("c2").innerText=runT;},1000);
+
+// 访问次数
+let v=localStorage.getItem("vst")||0;v++;localStorage.setItem("vst",v);
+document.getElementById("c3").innerText=v;
+
+// AI聊天
+function sendAI(){
+    let inp=document.getElementById("aiMsg");
+    let txt=inp.value.trim();
+    if(!txt)return;
+    let box=document.getElementById("aiChat");
+    box.innerHTML+="\n你："+txt;
+    let reply="";
+    if(txt.includes("你好")||txt.includes("hi"))reply=isCn?"你好呀！我是AI助手，有什么都可以问我。":"Hello! I'm AI assistant.";
+    else if(txt.includes("名字"))reply=isCn?"我是顶配内置AI机器人。":"I am built-in AI Robot.";
+    else if(txt.includes("时间"))reply=isCn:"现在时间："+new Date().toLocaleString():"Now: "+new Date().toLocaleString();
+    else reply=isCn?"我已收到你的消息，随时可以继续聊天！":"I got your message, keep chatting!";
+    box.innerHTML+="\nAI："+reply;
+    box.scrollTop=box.scrollHeight;
+    inp.value="";
+}
+</script>
 </body>
 </html>
