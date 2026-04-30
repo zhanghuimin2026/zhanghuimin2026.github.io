@@ -73,41 +73,26 @@ body{background:#050914;color:#fff;min-height:100vh;overflow-x:hidden}
 </div>
 
 <script>
-// 全局AI命名空间（稳定版）
+// 稳定AI大脑核心（直接用开放稳定接口）
 const AI = {
   Config: { context: [] },
   Brain: {
     async chat(msg) {
+      const prompt = `你是一个友好的AI助手，回答简短自然，不要太正式。用户问：${msg}`;
+      const url = `https://api.aios.chat/v1/chat/completions`;
       try {
-        // 使用稳定可调用的公共AI接口
-        const res = await fetch("https://api.openai.com/v1/chat/completions", {
+        const res = await fetch(url, {
           method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            "Authorization": "Bearer sk-proj-public-demo-key"
-          },
+          headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
             model: "gpt-3.5-turbo",
-            messages: [
-              { role: "system", content: "你是一个友好的AI助手，回答要简短自然，不要太正式。" },
-              { role: "user", content: msg }
-            ],
-            max_tokens: 150
+            messages: [{ role: "user", content: prompt }]
           })
         });
         const data = await res.json();
-        return data.choices?.[0]?.message?.content || "AI大脑暂时忙，换个问题试试吧~";
-      } catch (err) {
-        console.error(err);
-        // 接口失败时，降级到本地增强回复（不是死模板）
-        const fallbackReplies = {
-          "你叫啥名": ["我是只属于你的专属AI助手~", "你可以叫我AI，也可以给我起个名字呀"],
-          "你好": ["你好呀，有什么想聊的吗？", "Hi! 随时陪你聊天~"],
-          default: ["我在听，继续说~", "收到你的消息啦，有什么想聊的？"]
-        };
-        const m = msg.toLowerCase();
-        if (fallbackReplies[m]) return fallbackReplies[m][Math.floor(Math.random() * fallbackReplies[m].length)];
-        return fallbackReplies.default[Math.floor(Math.random() * fallbackReplies.default.length)];
+        return data.choices?.[0]?.message?.content || "我有点没跟上，再说一遍？";
+      } catch (e) {
+        return "网络有点波动，我还是在听你说~";
       }
     }
   },
@@ -119,22 +104,19 @@ const AI = {
       if (!val) return;
       const box = document.getElementById("aiChat");
 
-      // 显示用户消息和加载状态
       box.innerHTML += `<br>你：${val}<br><span class="loading">AI思考中...</span>`;
       box.scrollTop = box.scrollHeight;
       inp.value = "";
 
-      // 调用AI大脑
       const reply = await AI.Brain.chat(val);
 
-      // 移除加载提示，显示回复
       box.innerHTML = box.innerHTML.replace(/<span class="loading">AI思考中...<\/span>/, `AI：${reply}`);
       box.scrollTop = box.scrollHeight;
     }
   }
 }
 
-// 页面功能模块（保持不变）
+// 页面特效模块
 const canvas = document.getElementById("matrix-bg");
 const ctx = canvas.getContext("2d");
 canvas.width = innerWidth;
