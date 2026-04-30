@@ -73,15 +73,14 @@ body{background:#050914;color:#fff;min-height:100vh;overflow-x:hidden}
 </div>
 
 <script>
-// 稳定AI大脑核心（直接用开放稳定接口）
+// 稳定AI大脑核心（中文优化版）
 const AI = {
   Config: { context: [] },
   Brain: {
     async chat(msg) {
-      const prompt = `你是一个友好的AI助手，回答简短自然，不要太正式。用户问：${msg}`;
-      const url = `https://api.aios.chat/v1/chat/completions`;
+      const prompt = `你是一个会共情、会安慰人的AI，用简短自然的中文回答用户的问题，不要用英文，也不要太正式。用户说：${msg}`;
       try {
-        const res = await fetch(url, {
+        const res = await fetch("https://api.aios.chat/v1/chat/completions", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
@@ -90,9 +89,13 @@ const AI = {
           })
         });
         const data = await res.json();
-        return data.choices?.[0]?.message?.content || "我有点没跟上，再说一遍？";
+        return data.choices?.[0]?.message?.content || "我在呢，有什么不开心都可以跟我说~";
       } catch (e) {
-        return "网络有点波动，我还是在听你说~";
+        // 降级回复也用中文
+        if (msg.includes("烦") || msg.includes("不开心")) {
+          return "我懂这种感觉，别憋着，跟我说说吧~";
+        }
+        return "我在听，继续说~";
       }
     }
   },
