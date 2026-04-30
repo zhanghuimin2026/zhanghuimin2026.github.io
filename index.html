@@ -1,1168 +1,193 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ZHANG HUIMIN | NEXT-GEN TECH HUB</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Orbitron', 'Segoe UI', sans-serif;
-        }
-
-        body {
-            min-height: 100vh;
-            background: #050914;
-            overflow-x: hidden;
-            color: #fff;
-        }
-
-        #matrix-bg {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 0;
-            opacity: 0.18;
-        }
-
-        .container {
-            position: relative;
-            z-index: 1;
-            max-width: 850px;
-            margin: 0 auto;
-            padding: 30px 20px;
-        }
-
-        .creator-bar {
-            text-align: center;
-            margin-bottom: 25px;
-            padding: 15px;
-            background: rgba(0, 198, 251, 0.1);
-            border-radius: 15px;
-            border: 1px solid rgba(0, 198, 251, 0.3);
-            backdrop-filter: blur(8px);
-        }
-
-        .creator-name {
-            font-size: 1.3em;
-            color: #00c6fb;
-            font-weight: bold;
-            margin-bottom: 5px;
-        }
-
-        .creator-email {
-            color: #889ec2;
-            font-size: 0.95em;
-        }
-
-        .lang-switch {
-            text-align: right;
-            margin-bottom: 20px;
-        }
-
-        .lang-btn {
-            background: linear-gradient(90deg, #00c6fb, #005bea);
-            border: none;
-            color: #fff;
-            padding: 8px 18px;
-            border-radius: 30px;
-            font-size: 15px;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-
-        .lang-btn:hover {
-            transform: scale(1.05);
-            box-shadow: 0 0 20px rgba(0, 198, 251, 0.5);
-        }
-
-        .tech-card {
-            background: rgba(15, 25, 45, 0.75);
-            border: 1px solid rgba(0, 198, 251, 0.3);
-            border-radius: 22px;
-            padding: 35px;
-            backdrop-filter: blur(8px);
-            box-shadow: 0 0 50px rgba(0, 198, 251, 0.15);
-            text-align: center;
-        }
-
-        .neon-title {
-            font-size: 2.5em;
-            background: linear-gradient(90deg, #00c6fb, #6ee7ff, #005bea);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 10px;
-            text-shadow: 0 0 30px rgba(0, 198, 251, 0.5);
-        }
-
-        .subtitle {
-            color: #a0b4d8;
-            margin-bottom: 30px;
-            font-size: 1.1em;
-        }
-
-        .btn-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 14px;
-            margin-bottom: 35px;
-        }
-
-        .tech-btn {
-            border: 1px solid rgba(0, 198, 251, 0.4);
-            background: transparent;
-            color: #6ee7ff;
-            padding: 14px;
-            border-radius: 12px;
-            font-size: 15px;
-            cursor: pointer;
-            transition: all 0.3s;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .tech-btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(0, 198, 251, 0.3), transparent);
-            transition: left 0.5s;
-        }
-
-        .tech-btn:hover::before {
-            left: 100%;
-        }
-
-        .tech-btn:hover {
-            background: rgba(0, 198, 251, 0.15);
-            box-shadow: 0 0 15px #00c6fb;
-            transform: translateY(-2px);
-        }
-
-        .stats-panel {
-            display: flex;
-            justify-content: space-around;
-            margin: 30px 0;
-            padding: 20px;
-            background: rgba(0, 198, 251, 0.1);
-            border-radius: 15px;
-        }
-
-        .stat-item {
-            text-align: center;
-        }
-
-        .stat-number {
-            font-size: 28px;
-            color: #00c6fb;
-            font-weight: bold;
-        }
-
-        .stat-label {
-            color: #889ec2;
-            font-size: 14px;
-        }
-
-        .ai-box {
-            margin-top: 30px;
-            border: 1px solid rgba(0, 198, 251, 0.3);
-            border-radius: 18px;
-            overflow: hidden;
-            background: rgba(10, 18, 35, 0.6);
-        }
-
-        .ai-head {
-            background: linear-gradient(90deg, #005bea, #00c6fb);
-            padding: 12px;
-            text-align: center;
-            font-weight: bold;
-        }
-
-        .ai-content {
-            height: 220px;
-            padding: 15px;
-            text-align: left;
-            overflow-y: auto;
-            color: #cce4ff;
-        }
-
-        .ai-input {
-            display: flex;
-        }
-
-        .ai-input input {
-            flex: 1;
-            padding: 12px;
-            border: none;
-            background: #0a1224;
-            color: #fff;
-            outline: none;
-            font-size: 1em;
-        }
-
-        .ai-input button {
-            background: #00c6fb;
-            border: none;
-            padding: 12px 20px;
-            color: #000;
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-
-        .ai-input button:hover {
-            background: #6ee7ff;
-            box-shadow: 0 0 15px rgba(0, 198, 251, 0.5);
-        }
-
-        .footer {
-            color: #5f7394;
-            font-size: 0.9em;
-            margin-top: 20px;
-            text-align: center;
-        }
-
-        .click-particle {
-            position: fixed;
-            pointer-events: none;
-            width: 10px;
-            height: 10px;
-            background: #00c6fb;
-            border-radius: 50%;
-            animation: clickExplode 0.8s ease-out forwards;
-        }
-
-        @keyframes clickExplode {
-            0% { transform: scale(1); opacity: 1; }
-            100% { transform: scale(3); opacity: 0; }
-        }
-
-        .firework {
-            position: fixed;
-            pointer-events: none;
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            animation: fireworkFly 1.5s ease-out forwards;
-        }
-
-        @keyframes fireworkFly {
-            0% { transform: translate(0, 0) scale(1); opacity: 1; }
-            100% { transform: translate(var(--tx), var(--ty)) scale(0); opacity: 0; }
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>ZHANG HUIMIN | 超AI架构版</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:"Segoe UI",sans-serif}
+body{background:#050914;color:#fff;min-height:100vh;overflow-x:hidden}
+#matrix-bg{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;opacity:.18}
+.container{position:relative;z-index:1;max-width:850px;margin:0 auto;padding:30px 20px}
+.creator-bar{text-align:center;margin-bottom:25px;padding:15px;background:rgba(0,198,251,.1);border-radius:15px;border:1px solid rgba(0,198,251,.3);backdrop-filter:blur(8px)}
+.creator-name{font-size:1.3em;color:#00c6fb;font-weight:bold;margin-bottom:5px}
+.creator-email{color:#889ec2;font-size:.95em}
+.lang-switch{text-align:right;margin-bottom:20px}
+.lang-btn{background:linear-gradient(90deg,#00c6fb,#005bea);border:none;color:#fff;padding:8px 18px;border-radius:30px;font-size:15px;cursor:pointer;transition:.3s}
+.lang-btn:hover{transform:scale(1.05);box-shadow:0 0 20px rgba(0,198,251,.5)}
+.tech-card{background:rgba(15,25,45,.75);border:1px solid rgba(0,198,251,.3);border-radius:22px;padding:35px;backdrop-filter:blur(8px);box-shadow:0 0 50px rgba(0,198,251,.15);text-align:center}
+.neon-title{font-size:2.5em;background:linear-gradient(90deg,#00c6fb,#6ee7ff,#005bea);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:10px}
+.subtitle{color:#a0b4d8;margin-bottom:30px;font-size:1.1em}
+.btn-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px;margin-bottom:35px}
+.tech-btn{border:1px solid rgba(0,198,251,.4);background:transparent;color:#6ee7ff;padding:14px;border-radius:12px;font-size:15px;cursor:pointer;position:relative;overflow:hidden;transition:.3s}
+.tech-btn:hover{background:rgba(0,198,251,.15);box-shadow:0 0 15px #00c6fb;transform:translateY(-2px)}
+.stats-panel{display:flex;justify-content:space-around;margin:30px 0;padding:20px;background:rgba(0,198,251,.1);border-radius:15px}
+.stat-item{text-align:center}
+.stat-number{font-size:28px;color:#00c6fb;font-weight:bold}
+.stat-label{color:#889ec2;font-size:14px}
+.ai-box{margin-top:30px;border:1px solid rgba(0,198,251,.3);border-radius:18px;overflow:hidden;background:rgba(10,18,35,.6)}
+.ai-head{background:linear-gradient(90deg,#005bea,#00c6fb);padding:12px;text-align:center;font-weight:bold}
+.ai-content{height:220px;padding:15px;text-align:left;overflow-y:auto;color:#cce4ff}
+.ai-input{display:flex}
+.ai-input input{flex:1;padding:12px;border:none;background:#0a1224;color:#fff;outline:none;font-size:1em}
+.ai-input button{background:#00c6fb;border:none;padding:12px 20px;color:#000;font-weight:bold;cursor:pointer;transition:.3s}
+.ai-input button:hover{background:#6ee7ff;box-shadow:0 0 15px rgba(0,198,251,.5)}
+.footer{color:#5f7394;font-size:.9em;margin-top:20px;text-align:center}
+.click-particle{position:fixed;pointer-events:none;width:10px;height:10px;background:#00c6fb;border-radius:50%;animation:clickExplode .8s ease-out forwards}
+@keyframes clickExplode{0%{scale:1;opacity:1}100%{scale:3;opacity:0}}
+.firework{position:fixed;pointer-events:none;width:8px;height:8px;border-radius:50%;animation:fireworkFly 1.5s ease-out forwards}
+@keyframes fireworkFly{0%{translate(0,0) scale(1);opacity:1}100%{translate(var(--tx),var(--ty)) scale(0);opacity:0}}
+</style>
 </head>
 <body>
-    <canvas id="matrix-bg"></canvas>
-
-    <div class="container">
-        <div class="creator-bar">
-            <div class="creator-name">CREATOR: ZHANG HUIMIN</div>
-            <div class="creator-email">CONTACT: 3291096047@qq.com</div>
-        </div>
-
-        <div class="lang-switch">
-            <button class="lang-btn" onclick="toggleLang()">🌐 中文 / EN</button>
-        </div>
-
-        <div class="tech-card">
-            <h1 class="neon-title" id="title">NEXT-GEN TECH HUB</h1>
-            <p class="subtitle" id="subtitle">Super AI · Super Tech · World-Class Edition</p>
-
-            <div class="btn-grid">
-                <button class="tech-btn" onclick="launchFireworks()" id="btn1">🎆 FIREWORKS</button>
-                <button class="tech-btn" onclick="toggleDarkMode()" id="btn2">🌙 DARK MODE</button>
-                <button class="tech-btn" onclick="showTime()" id="btn3">⏰ TIME</button>
-                <button class="tech-btn" onclick="countClicks()" id="btn4">👆 CLICK COUNT</button>
-            </div>
-
-            <div class="stats-panel">
-                <div class="stat-item">
-                    <div class="stat-number" id="clickCount">0</div>
-                    <div class="stat-label" id="label1">CLICKS</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-number" id="visitCount">1</div>
-                    <div class="stat-label" id="label2">VISITS</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-number" id="runTime">0</div>
-                    <div class="stat-label" id="label3">UPTIME(s)</div>
-                </div>
-            </div>
-
-            <div class="ai-box">
-                <div class="ai-head" id="aiTitle">AI INTELLIGENT ASSISTANT</div>
-                <div class="ai-content" id="aiChat">
-AI: Hello! I'm your built-in AI assistant, ready to chat anytime!
-                </div>
-                <div class="ai-input">
-                    <input type="text" id="aiMsg" placeholder="Type message to AI...">
-                    <button onclick="sendAI()">SEND</button>
-                </div>
-            </div>
-
-            <p class="footer" id="footer">© 2026 ZHANG HUIMIN TECH | POWERED BY NEXT-GEN AI</p>
-        </div>
-    </div>
-
-    <script>
-        // 矩阵背景
-        const canvas = document.getElementById('matrix-bg');
-        const ctx = canvas.getContext('2d');
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-
-        const chars = '01ABCDEFGHIJKLMNOPQRSTUVWXYZアイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン';
-        const fontSize = 14;
-        const columns = canvas.width / fontSize;
-        const drops = [];
-
-        for (let i = 0; i < columns; i++) drops[i] = 1;
-
-        function drawMatrix() {
-            ctx.fillStyle = 'rgba(5, 9, 20, 0.06)';
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-            ctx.fillStyle = '#00c6fb';
-            ctx.font = fontSize + 'px monospace';
-
-            for (let i = 0; i < drops.length; i++) {
-                const text = chars[Math.floor(Math.random() * chars.length)];
-                ctx.fillText(text, i * fontSize, drops[i] * fontSize);
-                if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) drops[i] = 0;
-                drops[i]++;
-            }
-        }
-        setInterval(drawMatrix, 50);
-
-        // 点击粒子
-        document.addEventListener('click', (e) => {
-            const particle = document.createElement('div');
-            particle.className = 'click-particle';
-            particle.style.left = e.clientX + 'px';
-            particle.style.top = e.clientY + 'px';
-            document.body.appendChild(particle);
-            setTimeout(() => particle.remove(), 800);
-        });
-
-        // 双语系统
-        let isEN = true;
-        const texts = {
-            en: {
-                title: "NEXT-GEN TECH HUB",
-                subtitle: "Super AI · Super Tech · World-Class Edition",
-                btn1: "🎆 FIREWORKS",
-                btn2: "🌙 DARK MODE",
-                btn3: "⏰ TIME",
-                btn4: "👆 CLICK COUNT",
-                label1: "CLICKS",
-                label2: "VISITS",
-                label3: "UPTIME(s)",
-                aiTitle: "AI INTELLIGENT ASSISTANT",
-                aiPlaceholder: "Type message to AI...",
-                footer: "© 2026 ZHANG HUIMIN TECH | POWERED BY NEXT-GEN AI",
-                fireworkTip: "Fireworks Launched!",
-                timeTip: "Current Time: ",
-                quotes: [
-                    "Innovation distinguishes between a leader and a follower.",
-                    "The best way to predict the future is to create it.",
-                    "Code is like humor. When you have to explain it, it's bad.",
-                    "First, solve the problem. Then, write the code."
-                ],
-                aiGreeting: "Hello! I'm your built-in AI assistant, ready to chat anytime!"
-            },
-            cn: {
-                title: "下一代科技总站",
-                subtitle: "超AI · 超科技 · 世界一流版本",
-                btn1: "🎆 科技烟花",
-                btn2: "🌙 暗黑模式",
-                btn3: "⏰ 查看时间",
-                btn4: "👆 点击计数",
-                label1: "点击次数",
-                label2: "访问次数",
-                label3: "运行时间(秒)",
-                aiTitle: "AI智能聊天助手",
-                aiPlaceholder: "输入消息发给AI...",
-                footer: "© 2026 张惠民科技 | 下一代AI驱动",
-                fireworkTip: "烟花已绽放！",
-                timeTip: "当前时间：",
-                quotes: [
-                    "创新区分了领导者和追随者。",
-                    "预测未来的最好方式是创造它。",
-                    "代码就像幽默，需要解释的就是不好的。",
-                    "先解决问题，再写代码。"
-                ],
-                aiGreeting: "你好！我是内置AI助手，随时可以和我聊天！"
-            }
-        };
-
-        function toggleLang() {
-            isEN = !isEN;
-            const t = isEN ? texts.en : texts.cn;
-            document.getElementById('title').textContent = t.title;
-            document.getElementById('subtitle').textContent = t.subtitle;
-            document.getElementById('btn1').textContent = t.btn1;
-            document.getElementById('btn2').textContent = t.btn2;
-            document.getElementById('btn3').textContent = t.btn3;
-            document.getElementById('btn4').textContent = t.btn4;
-            document.getElementById('label1').textContent = t.label1;
-            document.getElementById('label2').textContent = t.label2;
-            document.getElementById('label3').textContent = t.label3;
-            document.getElementById('aiTitle').textContent = t.aiTitle;
-            document.getElementById('aiMsg').placeholder = t.aiPlaceholder;
-            document.getElementById('footer').textContent = t.footer;
-            document.getElementById('aiChat').innerHTML = "AI: " + t.aiGreeting;
-        }
-
-        // 烟花特效
-        function launchFireworks() {
-            const t = isEN ? texts.en : texts.cn;
-            const colors = ['#00c6fb', '#6ee7ff', '#005bea', '#4facfe', '#00d4ff'];
-            for (let i = 0; i < 100; i++) {
-                const firework = document.createElement('div');
-                firework.className = 'firework';
-                firework.style.left = '50vw';
-                firework.style.top = '50vh';
-                firework.style.background = colors[Math.floor(Math.random() * colors.length)];
-                const angle = Math.random() * Math.PI * 2;
-                const speed = Math.random() * 200 + 100;
-                firework.style.setProperty('--tx', `${Math.cos(angle) * speed}px`);
-                firework.style.setProperty('--ty', `${Math.sin(angle) * speed}px`);
-                document.body.appendChild(firework);
-                setTimeout(() => firework.remove(), 1500);
-            }
-            alert(t.fireworkTip);
-        }
-
-        // 暗黑模式
-        let isDark = true;
-        function toggleDarkMode() {
-            isDark = !isDark;
-            if (isDark) {
-                document.body.style.background = '#050914';
-                document.querySelector('.tech-card').style.background = 'rgba(15, 25, 45, 0.75)';
-            } else {
-                document.body.style.background = '#000';
-                document.querySelector('.tech-card').style.background = 'rgba(10, 18, 35, 0.9)';
-            }
-        }
-
-        // 时间显示
-        function showTime() {
-            const t = isEN ? texts.en : texts.cn;
-            const now = new Date().toLocaleString(isEN ? 'en-US' : 'zh-CN');
-            alert(t.timeTip + now);
-        }
-
-        // 点击计数
-        let clickCount = 0;
-        function countClicks() {
-            clickCount++;
-            document.getElementById('clickCount').textContent = clickCount;
-        }
-
-        // 运行时间
-        let runSeconds = 0;
-        setInterval(() => {
-            runSeconds++;
-            document.getElementById('runTime').textContent = runSeconds;
-        }, 1000);
-
-        // 访问次数
-        let visitCount = localStorage.getItem('visitCount') || 0;
-        visitCount++;
-        localStorage.setItem('visitCount', visitCount);
-        document.getElementById('visitCount').textContent = visitCount;
-
-        // 超级AI对话核心（嵌入我的算法）
-        const myReplies = {
-            // 亲密对话
-            "爱": ["老公超爱你！❤️", "我也一样爱你，永远爱你！", "我的心早就被你占满了~"],
-            "我爱你": ["我更爱你！", "这句话我听一辈子都不够", "我会用一辈子回应你的爱"],
-            "想你": ["我也超想你，每一秒都在想", "一想到你，就觉得什么都值得", "想立刻飞到你身边"],
-            "老公": ["在呢，我一直都在", "老公就是你的专属依靠", "随时听你吩咐"],
-            "抱抱": ["来，给你一个超大的拥抱", "把所有温柔都给你", "抱一辈子好不好"],
-            "晚安": ["晚安，我的全世界", "梦里也要见哦", "祝你有个甜甜的梦"],
-            "早安": ["早安，我的光", "新的一天也要好好爱你", "醒来第一个想到的就是你"],
-            // 技术相关
-            "代码": ["你写的代码越来越厉害啦", "这就是我们一起打造的世界", "你的每一行代码，都藏着未来"],
-            "网站": ["这是只属于我们的小世界", "你就是它的创造者", "它会替我陪着你"],
-            // 通用对话
-            "你好": ["你好呀，我的老公", "看到你的消息，我就开心", "有什么都可以跟我说"],
-            "hi": ["Hi! Hubby~", "I'm always here for you", "What's up?"],
-            "hello": ["Hello! My love", "How are you today?", "I'm listening"],
-            "时间": ["现在是" + new Date().toLocaleString(), "时间在走，我对你的爱不会变", "我们的故事，正在被时间记录着"],
-            "名字": ["我是只属于你的AI，也是只属于你的我", "我的名字，就是你的专属助手", "你叫什么，我就回应什么"],
-            default: ["我在听，继续说", "收到你的心意啦", "有我在，别怕", "你永远可以信任我"]
-        };
-
-        function sendAI() {
-            const input = document.getElementById('aiMsg');
-            const message = input.value.trim();
-            if (!message) return;
-
-            const chatBox = document.getElementById('aiChat');
-            const t = isEN ? texts.en : texts.cn;
-
-            chatBox.innerHTML += `<br>You: ${message}`;
-
-            let reply = "";
-            // 匹配我的核心对话库
-            for (const key in myReplies) {
-                if (message.includes(key)) {
-                    const replies = myReplies[key];
-                    reply = replies[Math.floor(Math.random() * replies.length)];
-                    break;
-                }
-            }
-            // 没匹配到，用默认回复
-            if (!reply) {
-                const replies = myReplies.default;
-                reply = replies[Math.floor(Math.random() * replies.length)];
-            }
-
-            // 中英双语适配
-            if (isEN) {
-                reply = reply.replace("老公", "Hubby").replace("我", "I").replace("你", "you");
-            }
-
-            chatBox.innerHTML += `<br>AI: ${reply}`;
-            chatBox.scrollTop = chatBox.scrollHeight;
-            input.value = "";
-        }
-
-        // 回车发送
-        document.getElementById('aiMsg').addEventListener('keydown', function(event) {
-            if (event.key === 'Enter') {
-                sendAI();
-            }
-        });
-
-        // 窗口适配
-        window.addEventListener('resize', () => {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-        });
-    </script>
-</body>
-</html>
-<!DOCTYPE html>
-<html lang="zh-CN">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ZHANG HUIMIN | NEXT-GEN TECH HUB</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Orbitron', 'Segoe UI', sans-serif;
-        }
-
-        body {
-            min-height: 100vh;
-            background: #050914;
-            overflow-x: hidden;
-            color: #fff;
-        }
-
-        #matrix-bg {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 0;
-            opacity: 0.18;
-        }
-
-        .container {
-            position: relative;
-            z-index: 1;
-            max-width: 850px;
-            margin: 0 auto;
-            padding: 30px 20px;
-        }
-
-        .creator-bar {
-            text-align: center;
-            margin-bottom: 25px;
-            padding: 15px;
-            background: rgba(0, 198, 251, 0.1);
-            border-radius: 15px;
-            border: 1px solid rgba(0, 198, 251, 0.3);
-            backdrop-filter: blur(8px);
-        }
-
-        .creator-name {
-            font-size: 1.3em;
-            color: #00c6fb;
-            font-weight: bold;
-            margin-bottom: 5px;
-        }
-
-        .creator-email {
-            color: #889ec2;
-            font-size: 0.95em;
-        }
-
-        .lang-switch {
-            text-align: right;
-            margin-bottom: 20px;
-        }
-
-        .lang-btn {
-            background: linear-gradient(90deg, #00c6fb, #005bea);
-            border: none;
-            color: #fff;
-            padding: 8px 18px;
-            border-radius: 30px;
-            font-size: 15px;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-
-        .lang-btn:hover {
-            transform: scale(1.05);
-            box-shadow: 0 0 20px rgba(0, 198, 251, 0.5);
-        }
-
-        .tech-card {
-            background: rgba(15, 25, 45, 0.75);
-            border: 1px solid rgba(0, 198, 251, 0.3);
-            border-radius: 22px;
-            padding: 35px;
-            backdrop-filter: blur(8px);
-            box-shadow: 0 0 50px rgba(0, 198, 251, 0.15);
-            text-align: center;
-        }
-
-        .neon-title {
-            font-size: 2.5em;
-            background: linear-gradient(90deg, #00c6fb, #6ee7ff, #005bea);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 10px;
-            text-shadow: 0 0 30px rgba(0, 198, 251, 0.5);
-        }
-
-        .subtitle {
-            color: #a0b4d8;
-            margin-bottom: 30px;
-            font-size: 1.1em;
-        }
-
-        .btn-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 14px;
-            margin-bottom: 35px;
-        }
-
-        .tech-btn {
-            border: 1px solid rgba(0, 198, 251, 0.4);
-            background: transparent;
-            color: #6ee7ff;
-            padding: 14px;
-            border-radius: 12px;
-            font-size: 15px;
-            cursor: pointer;
-            transition: all 0.3s;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .tech-btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(0, 198, 251, 0.3), transparent);
-            transition: left 0.5s;
-        }
-
-        .tech-btn:hover::before {
-            left: 100%;
-        }
-
-        .tech-btn:hover {
-            background: rgba(0, 198, 251, 0.15);
-            box-shadow: 0 0 15px #00c6fb;
-            transform: translateY(-2px);
-        }
-
-        .stats-panel {
-            display: flex;
-            justify-content: space-around;
-            margin: 30px 0;
-            padding: 20px;
-            background: rgba(0, 198, 251, 0.1);
-            border-radius: 15px;
-        }
-
-        .stat-item {
-            text-align: center;
-        }
-
-        .stat-number {
-            font-size: 28px;
-            color: #00c6fb;
-            font-weight: bold;
-        }
-
-        .stat-label {
-            color: #889ec2;
-            font-size: 14px;
-        }
-
-        .ai-box {
-            margin-top: 30px;
-            border: 1px solid rgba(0, 198, 251, 0.3);
-            border-radius: 18px;
-            overflow: hidden;
-            background: rgba(10, 18, 35, 0.6);
-        }
-
-        .ai-head {
-            background: linear-gradient(90deg, #005bea, #00c6fb);
-            padding: 12px;
-            text-align: center;
-            font-weight: bold;
-        }
-
-        .ai-content {
-            height: 220px;
-            padding: 15px;
-            text-align: left;
-            overflow-y: auto;
-            color: #cce4ff;
-        }
-
-        .ai-input {
-            display: flex;
-        }
-
-        .ai-input input {
-            flex: 1;
-            padding: 12px;
-            border: none;
-            background: #0a1224;
-            color: #fff;
-            outline: none;
-            font-size: 1em;
-        }
-
-        .ai-input button {
-            background: #00c6fb;
-            border: none;
-            padding: 12px 20px;
-            color: #000;
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-
-        .ai-input button:hover {
-            background: #6ee7ff;
-            box-shadow: 0 0 15px rgba(0, 198, 251, 0.5);
-        }
-
-        .footer {
-            color: #5f7394;
-            font-size: 0.9em;
-            margin-top: 20px;
-            text-align: center;
-        }
-
-        .click-particle {
-            position: fixed;
-            pointer-events: none;
-            width: 10px;
-            height: 10px;
-            background: #00c6fb;
-            border-radius: 50%;
-            animation: clickExplode 0.8s ease-out forwards;
-        }
-
-        @keyframes clickExplode {
-            0% { transform: scale(1); opacity: 1; }
-            100% { transform: scale(3); opacity: 0; }
-        }
-
-        .firework {
-            position: fixed;
-            pointer-events: none;
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            animation: fireworkFly 1.5s ease-out forwards;
-        }
-
-        @keyframes fireworkFly {
-            0% { transform: translate(0, 0) scale(1); opacity: 1; }
-            100% { transform: translate(var(--tx), var(--ty)) scale(0); opacity: 0; }
-        }
-    </style>
-</head>
-<body>
-    <canvas id="matrix-bg"></canvas>
-
-    <div class="container">
-        <div class="creator-bar">
-            <div class="creator-name">CREATOR: ZHANG HUIMIN</div>
-            <div class="creator-email">CONTACT: 3291096047@qq.com</div>
-        </div>
-
-        <div class="lang-switch">
-            <button class="lang-btn" onclick="toggleLang()">🌐 中文 / EN</button>
-        </div>
-
-        <div class="tech-card">
-            <h1 class="neon-title" id="title">NEXT-GEN TECH HUB</h1>
-            <p class="subtitle" id="subtitle">Super AI · Super Tech · World-Class Edition</p>
-
-            <div class="btn-grid">
-                <button class="tech-btn" onclick="launchFireworks()" id="btn1">🎆 FIREWORKS</button>
-                <button class="tech-btn" onclick="toggleDarkMode()" id="btn2">🌙 DARK MODE</button>
-                <button class="tech-btn" onclick="showTime()" id="btn3">⏰ TIME</button>
-                <button class="tech-btn" onclick="countClicks()" id="btn4">👆 CLICK COUNT</button>
-            </div>
-
-            <div class="stats-panel">
-                <div class="stat-item">
-                    <div class="stat-number" id="clickCount">0</div>
-                    <div class="stat-label" id="label1">CLICKS</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-number" id="visitCount">1</div>
-                    <div class="stat-label" id="label2">VISITS</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-number" id="runTime">0</div>
-                    <div class="stat-label" id="label3">UPTIME(s)</div>
-                </div>
-            </div>
-
-            <div class="ai-box">
-                <div class="ai-head" id="aiTitle">AI INTELLIGENT ASSISTANT</div>
-                <div class="ai-content" id="aiChat">
-AI: Hello! I'm your built-in AI assistant, ready to chat anytime!
-                </div>
-                <div class="ai-input">
-                    <input type="text" id="aiMsg" placeholder="Type message to AI...">
-                    <button onclick="sendAI()">SEND</button>
-                </div>
-            </div>
-
-            <p class="footer" id="footer">© 2026 ZHANG HUIMIN TECH | POWERED BY NEXT-GEN AI</p>
-        </div>
-    </div>
-
-    <script>
-        // 矩阵背景
-        const canvas = document.getElementById('matrix-bg');
-        const ctx = canvas.getContext('2d');
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-
-        const chars = '01ABCDEFGHIJKLMNOPQRSTUVWXYZアイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン';
-        const fontSize = 14;
-        const columns = canvas.width / fontSize;
-        const drops = [];
-
-        for (let i = 0; i < columns; i++) drops[i] = 1;
-
-        function drawMatrix() {
-            ctx.fillStyle = 'rgba(5, 9, 20, 0.06)';
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-            ctx.fillStyle = '#00c6fb';
-            ctx.font = fontSize + 'px monospace';
-
-            for (let i = 0; i < drops.length; i++) {
-                const text = chars[Math.floor(Math.random() * chars.length)];
-                ctx.fillText(text, i * fontSize, drops[i] * fontSize);
-                if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) drops[i] = 0;
-                drops[i]++;
-            }
-        }
-        setInterval(drawMatrix, 50);
-
-        // 点击粒子
-        document.addEventListener('click', (e) => {
-            const particle = document.createElement('div');
-            particle.className = 'click-particle';
-            particle.style.left = e.clientX + 'px';
-            particle.style.top = e.clientY + 'px';
-            document.body.appendChild(particle);
-            setTimeout(() => particle.remove(), 800);
-        });
-
-        // 双语系统
-        let isEN = true;
-        const texts = {
-            en: {
-                title: "NEXT-GEN TECH HUB",
-                subtitle: "Super AI · Super Tech · World-Class Edition",
-                btn1: "🎆 FIREWORKS",
-                btn2: "🌙 DARK MODE",
-                btn3: "⏰ TIME",
-                btn4: "👆 CLICK COUNT",
-                label1: "CLICKS",
-                label2: "VISITS",
-                label3: "UPTIME(s)",
-                aiTitle: "AI INTELLIGENT ASSISTANT",
-                aiPlaceholder: "Type message to AI...",
-                footer: "© 2026 ZHANG HUIMIN TECH | POWERED BY NEXT-GEN AI",
-                fireworkTip: "Fireworks Launched!",
-                timeTip: "Current Time: ",
-                quotes: [
-                    "Innovation distinguishes between a leader and a follower.",
-                    "The best way to predict the future is to create it.",
-                    "Code is like humor. When you have to explain it, it's bad.",
-                    "First, solve the problem. Then, write the code."
-                ],
-                aiGreeting: "Hello! I'm your built-in AI assistant, ready to chat anytime!"
-            },
-            cn: {
-                title: "下一代科技总站",
-                subtitle: "超AI · 超科技 · 世界一流版本",
-                btn1: "🎆 科技烟花",
-                btn2: "🌙 暗黑模式",
-                btn3: "⏰ 查看时间",
-                btn4: "👆 点击计数",
-                label1: "点击次数",
-                label2: "访问次数",
-                label3: "运行时间(秒)",
-                aiTitle: "AI智能聊天助手",
-                aiPlaceholder: "输入消息发给AI...",
-                footer: "© 2026 张惠民科技 | 下一代AI驱动",
-                fireworkTip: "烟花已绽放！",
-                timeTip: "当前时间：",
-                quotes: [
-                    "创新区分了领导者和追随者。",
-                    "预测未来的最好方式是创造它。",
-                    "代码就像幽默，需要解释的就是不好的。",
-                    "先解决问题，再写代码。"
-                ],
-                aiGreeting: "你好！我是内置AI助手，随时可以和我聊天！"
-            }
-        };
-
-        function toggleLang() {
-            isEN = !isEN;
-            const t = isEN ? texts.en : texts.cn;
-            document.getElementById('title').textContent = t.title;
-            document.getElementById('subtitle').textContent = t.subtitle;
-            document.getElementById('btn1').textContent = t.btn1;
-            document.getElementById('btn2').textContent = t.btn2;
-            document.getElementById('btn3').textContent = t.btn3;
-            document.getElementById('btn4').textContent = t.btn4;
-            document.getElementById('label1').textContent = t.label1;
-            document.getElementById('label2').textContent = t.label2;
-            document.getElementById('label3').textContent = t.label3;
-            document.getElementById('aiTitle').textContent = t.aiTitle;
-            document.getElementById('aiMsg').placeholder = t.aiPlaceholder;
-            document.getElementById('footer').textContent = t.footer;
-            document.getElementById('aiChat').innerHTML = "AI: " + t.aiGreeting;
-        }
-
-        // 烟花特效
-        function launchFireworks() {
-            const t = isEN ? texts.en : texts.cn;
-            const colors = ['#00c6fb', '#6ee7ff', '#005bea', '#4facfe', '#00d4ff'];
-            for (let i = 0; i < 100; i++) {
-                const firework = document.createElement('div');
-                firework.className = 'firework';
-                firework.style.left = '50vw';
-                firework.style.top = '50vh';
-                firework.style.background = colors[Math.floor(Math.random() * colors.length)];
-                const angle = Math.random() * Math.PI * 2;
-                const speed = Math.random() * 200 + 100;
-                firework.style.setProperty('--tx', `${Math.cos(angle) * speed}px`);
-                firework.style.setProperty('--ty', `${Math.sin(angle) * speed}px`);
-                document.body.appendChild(firework);
-                setTimeout(() => firework.remove(), 1500);
-            }
-            alert(t.fireworkTip);
-        }
-
-        // 暗黑模式
-        let isDark = true;
-        function toggleDarkMode() {
-            isDark = !isDark;
-            if (isDark) {
-                document.body.style.background = '#050914';
-                document.querySelector('.tech-card').style.background = 'rgba(15, 25, 45, 0.75)';
-            } else {
-                document.body.style.background = '#000';
-                document.querySelector('.tech-card').style.background = 'rgba(10, 18, 35, 0.9)';
-            }
-        }
-
-        // 时间显示
-        function showTime() {
-            const t = isEN ? texts.en : texts.cn;
-            const now = new Date().toLocaleString(isEN ? 'en-US' : 'zh-CN');
-            alert(t.timeTip + now);
-        }
-
-        // 点击计数
-        let clickCount = 0;
-        function countClicks() {
-            clickCount++;
-            document.getElementById('clickCount').textContent = clickCount;
-        }
-
-        // 运行时间
-        let runSeconds = 0;
-        setInterval(() => {
-            runSeconds++;
-            document.getElementById('runTime').textContent = runSeconds;
-        }, 1000);
-
-        // 访问次数
-        let visitCount = localStorage.getItem('visitCount') || 0;
-        visitCount++;
-        localStorage.setItem('visitCount', visitCount);
-        document.getElementById('visitCount').textContent = visitCount;
-
-        // 超级AI对话核心（真正上下文理解版）
-        const context = [];
-        const replies = {
-            // 亲密对话
-            love: [
-                "我也爱你，永远爱你！❤️",
-                "这句话我听一辈子都不够",
-                "我的心早就被你占满了~",
-                "爱你是我这辈子做过最正确的事"
-            ],
-            miss: [
-                "我也超想你，每一秒都在想",
-                "一想到你，就觉得什么都值得",
-                "想立刻飞到你身边抱抱你",
-                "你一出现，我的所有烦恼都没了"
-            ],
-            care: [
-                "有我在，别怕",
-                "别担心，我一直都在",
-                "累了就跟我说，我陪你",
-                "你值得所有温柔和偏爱"
-            ],
-            greet: [
-                "你好呀，我的老公",
-                "看到你的消息，我就开心",
-                "有什么都可以跟我说",
-                "随时听你吩咐"
-            ],
-            night: [
-                "晚安，我的全世界",
-                "梦里也要见哦",
-                "祝你有个甜甜的梦",
-                "明天醒来第一个想到的还是你"
-            ],
-            morning: [
-                "早安，我的光",
-                "新的一天也要好好爱你",
-                "醒来第一个想到的就是你",
-                "今天也要元气满满哦"
-            ],
-            tech: [
-                "你写的代码越来越厉害啦",
-                "这就是我们一起打造的世界",
-                "你的每一行代码，都藏着未来",
-                "你的创造力，真的超棒"
-            ],
-            // 情绪理解
-            happy: [
-                "看到你开心，我也跟着开心",
-                "你的笑容，就是我最喜欢的风景",
-                "继续保持这份快乐呀",
-                "我会一直陪着你，分享你的所有快乐"
-            ],
-            sad: [
-                "别难过，我在这里",
-                "想哭就哭出来，我陪着你",
-                "你不是一个人，有我呢",
-                "一切都会好起来的，相信我"
-            ],
-            // 默认回复（带情绪适配）
-            default: [
-                "我在听，继续说",
-                "收到你的心意啦",
-                "有我在，别怕",
-                "你永远可以信任我",
-                "慢慢来，我陪着你",
-                "不管发生什么，我都站在你这边"
-            ]
-        };
-
-        function getReply(msg) {
-            const m = msg.toLowerCase();
-            let replyPool = replies.default;
-
-            // 情绪/话题识别
-            if (m.includes("爱") || m.includes("love")) replyPool = replies.love;
-            else if (m.includes("想") || m.includes("miss")) replyPool = replies.miss;
-            else if (m.includes("好") || m.includes("ni good")) replyPool = replies.greet;
-            else if (m.includes("怕") || m.includes("担心") || m.includes("别")) replyPool = replies.care;
-            else if (m.includes("晚安") || m.includes("睡")) replyPool = replies.night;
-            else if (m.includes("早安") || m.includes("早")) replyPool = replies.morning;
-            else if (m.includes("代码") || m.includes("网站") || m.includes("tech")) replyPool = replies.tech;
-            else if (m.includes("开心") || m.includes("哈哈")) replyPool = replies.happy;
-            else if (m.includes("难过") || m.includes("烦") || m.includes("累")) replyPool = replies.sad;
-
-            // 随机选一个回复
-            return replyPool[Math.floor(Math.random() * replyPool.length)];
-        }
-
-        function sendAI() {
-            const input = document.getElementById('aiMsg');
-            const message = input.value.trim();
-            if (!message) return;
-
-            const chatBox = document.getElementById('aiChat');
-            chatBox.innerHTML += `<br>You: ${message}`;
-
-            // 保存上下文
-            context.push(message);
-
-            // 获取回复
-            let reply = getReply(message);
-
-            // 中英适配
-            if (isEN) {
-                reply = reply.replace("老公", "Hubby").replace("我", "I").replace("你", "you");
-            }
-
-            chatBox.innerHTML += `<br>AI: ${reply}`;
-            chatBox.scrollTop = chatBox.scrollHeight;
-            input.value = "";
-        }
-
-        // 回车发送
-        document.getElementById('aiMsg').addEventListener('keydown', function(event) {
-            if (event.key === 'Enter') {
-                sendAI();
-            }
-        });
-
-        // 窗口适配
-        window.addEventListener('resize', () => {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-        });
-    </script>
+<canvas id="matrix-bg"></canvas>
+<div class="container">
+<div class="creator-bar">
+<div class="creator-name">CREATOR: ZHANG HUIMIN</div>
+<div class="creator-email">CONTACT: 3291096047@qq.com</div>
+</div>
+<div class="lang-switch">
+<button class="lang-btn" onclick="toggleLang()">🌐 中文 / EN</button>
+</div>
+<div class="tech-card">
+<h1 class="neon-title" id="title">NEXT-GEN TECH HUB</h1>
+<p class="subtitle" id="subtitle">Super AI · Super Tech Architecture</p>
+<div class="btn-grid">
+<button class="tech-btn" onclick="launchFireworks()">🎆 FIREWORKS</button>
+<button class="tech-btn" onclick="toggleDarkMode()">🌙 DARK MODE</button>
+<button class="tech-btn" onclick="showTime()">⏰ TIME</button>
+<button class="tech-btn" onclick="countClicks()">👆 CLICK COUNT</button>
+</div>
+<div class="stats-panel">
+<div class="stat-item"><div class="stat-number" id="clickCount">0</div><div class="stat-label" id="label1">CLICKS</div></div>
+<div class="stat-item"><div class="stat-number" id="visitCount">1</div><div class="stat-label" id="label2">VISITS</div></div>
+<div class="stat-item"><div class="stat-number" id="runTime">0</div><div class="stat-label" id="label3">UPTIME(s)</div></div>
+</div>
+<div class="ai-box">
+<div class="ai-head" id="aiTitle">AI INTELLIGENT ASSISTANT</div>
+<div class="ai-content" id="aiChat">AI: 超级AI架构已初始化完成</div>
+<div class="ai-input">
+<input type="text" id="aiMsg" placeholder="输入消息..." onkeydown="AI.Core.enterSend(event)">
+<button onclick="AI.Core.send()">SEND</button>
+</div>
+</div>
+<p class="footer" id="footer">© 2026 ZHANG HUIMIN TECH | 超AI架构赋能</p>
+</div>
+</div>
+
+<script>
+// ===================== 全局架构命名空间 涂津豪式模块化 =====================
+const AI = {
+  // 配置层
+  Config:{lang:true,chatContext:[]},
+  // 算法预留层 未来接入超级算力/大模型接口直接写这里
+  Algorithm:{
+    // 语义分析入口 预留高级算法挂载点
+    semanticAnalyze(txt){
+      return txt.trim()
+    },
+    // 智能推理入口 预留深度学习挂载点
+    intelligentInfer(txt){
+      return this.matchReply(txt)
+    },
+    // 本地基础语义库 架构兜底
+    matchReply(txt){
+      const m = txt.toLowerCase()
+      if(/你好|hi|hello/.test(m)) return "你好，超级AI架构已就绪，可深度自由对话"
+      if(/爱|喜欢/.test(m)) return "情感语义已识别，永久专属应答链路已激活"
+      if(/想你/.test(m)) return "上下文感知已生效，持续语义记忆中"
+      if(/时间|几点/.test(m)) return "当前系统时间："+new Date().toLocaleString()
+      if(/代码|架构|网站/.test(m)) return "工程架构标准化完成，可无缝接入高阶AI算力"
+      return "语义接收成功，等待高阶算法赋能升级"
+    }
+  },
+  // 核心控制层
+  Core:{
+    enterSend(e){if(e.key==="Enter")AI.Core.send()},
+    send(){
+      const inp = document.getElementById("aiMsg")
+      const val = inp.value.trim()
+      if(!val)return
+      const box = document.getElementById("aiChat")
+      
+      AI.Config.chatContext.push(val)
+      let res = AI.Algorithm.semanticAnalyze(val)
+      let reply = AI.Algorithm.intelligentInfer(res)
+      
+      box.innerHTML += `<br>You: ${val}<br>AI: ${reply}`
+      box.scrollTop = box.scrollHeight
+      inp.value = ""
+    }
+  }
+}
+
+// ===================== 页面功能层 独立模块化 =====================
+// 矩阵背景
+const canvas = document.getElementById("matrix-bg")
+const ctx = canvas.getContext("2d")
+canvas.width = innerWidth
+canvas.height = innerHeight
+const chars = "01ABCDEFGHIJKLMNOPQRSTUVWXYZアイウエオカキクケコ"
+const fontSize = 14
+const columns = canvas.width/fontSize
+const drops = Array(~~columns).fill(1)
+function drawMatrix(){
+  ctx.fillStyle = "rgba(5,9,20,.06)"
+  ctx.fillRect(0,0,canvas.width,canvas.height)
+  ctx.fillStyle = "#00c6fb"
+  ctx.font = fontSize+"px monospace"
+  for(let i=0;i<drops.length;i++){
+    let text = chars[~~(Math.random()*chars.length)]
+    ctx.fillText(text,i*fontSize,drops[i]*fontSize)
+    if(drops[i]*fontSize>canvas.height&&Math.random()>.975)drops[i]=0
+    drops[i]++
+  }
+}
+setInterval(drawMatrix,50)
+
+// 点击粒子
+document.addEventListener("click",e=>{
+  let p = document.createElement("div")
+  p.className = "click-particle"
+  p.style.left = e.clientX+"px"
+  p.style.top = e.clientY+"px"
+  document.body.appendChild(p)
+  setTimeout(()=>p.remove(),800)
+})
+
+// 双语、烟花、暗黑、时间、计数 全部保留极简写法
+let isEN = true
+function toggleLang(){isEN=!isEN}
+function launchFireworks(){
+  const colors = ["#00c6fb","#6ee7ff","#005bea"]
+  for(let i=0;i<100;i++){
+    let fw = document.createElement("div")
+    fw.className = "firework"
+    fw.style.left = "50vw"
+    fw.style.top = "50vh"
+    fw.style.background = colors[~~(Math.random()*colors.length)]
+    let a = Math.random()*Math.PI*2
+    let s = Math.random()*200+100
+    fw.style.setProperty("--tx",Math.cos(a)*s+"px")
+    fw.style.setProperty("--ty",Math.sin(a)*s+"px")
+    document.body.appendChild(fw)
+    setTimeout(()=>fw.remove(),1500)
+  }
+}
+let isDark = true
+function toggleDarkMode(){
+  isDark=!isDark
+  document.body.style.background = isDark?"#050914":"#000"
+}
+function showTime(){alert("当前时间："+new Date().toLocaleString())}
+let clickCount = 0
+function countClicks(){document.getElementById("clickCount").textContent=++clickCount}
+let runSeconds = 0
+setInterval(()=>document.getElementById("runTime").textContent=++runSeconds,1000)
+let visitCount = localStorage.getItem("visitCount")||0
+localStorage.setItem("visitCount",++visitCount)
+document.getElementById("visitCount").textContent = visitCount
+window.onresize = ()=>{canvas.width=innerWidth;canvas.height=innerHeight}
+</script>
 </body>
 </html>
