@@ -19,7 +19,6 @@
             color: #fff;
         }
 
-        /* 矩阵背景 */
         #matrix-bg {
             position: fixed;
             top: 0;
@@ -30,7 +29,6 @@
             opacity: 0.18;
         }
 
-        /* 主容器 */
         .container {
             position: relative;
             z-index: 1;
@@ -39,7 +37,6 @@
             padding: 30px 20px;
         }
 
-        /* 创作者信息栏 */
         .creator-bar {
             text-align: center;
             margin-bottom: 25px;
@@ -62,7 +59,6 @@
             font-size: 0.95em;
         }
 
-        /* 语言切换 */
         .lang-switch {
             text-align: right;
             margin-bottom: 20px;
@@ -84,7 +80,6 @@
             box-shadow: 0 0 20px rgba(0, 198, 251, 0.5);
         }
 
-        /* 主卡片 */
         .tech-card {
             background: rgba(15, 25, 45, 0.75);
             border: 1px solid rgba(0, 198, 251, 0.3);
@@ -95,7 +90,6 @@
             text-align: center;
         }
 
-        /* 霓虹标题 */
         .neon-title {
             font-size: 2.5em;
             background: linear-gradient(90deg, #00c6fb, #6ee7ff, #005bea);
@@ -112,7 +106,6 @@
             font-size: 1.1em;
         }
 
-        /* 按钮组 */
         .btn-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
@@ -154,7 +147,6 @@
             transform: translateY(-2px);
         }
 
-        /* 数据面板 */
         .stats-panel {
             display: flex;
             justify-content: space-around;
@@ -179,7 +171,6 @@
             font-size: 14px;
         }
 
-        /* AI聊天窗口 */
         .ai-box {
             margin-top: 30px;
             border: 1px solid rgba(0, 198, 251, 0.3);
@@ -232,7 +223,6 @@
             box-shadow: 0 0 15px rgba(0, 198, 251, 0.5);
         }
 
-        /* 底部信息 */
         .footer {
             color: #5f7394;
             font-size: 0.9em;
@@ -240,7 +230,6 @@
             text-align: center;
         }
 
-        /* 点击粒子特效 */
         .click-particle {
             position: fixed;
             pointer-events: none;
@@ -256,7 +245,6 @@
             100% { transform: scale(3); opacity: 0; }
         }
 
-        /* 烟花粒子 */
         .firework {
             position: fixed;
             pointer-events: none;
@@ -273,17 +261,14 @@
     </style>
 </head>
 <body>
-    <!-- 矩阵背景 -->
     <canvas id="matrix-bg"></canvas>
 
     <div class="container">
-        <!-- 创作者信息栏 -->
         <div class="creator-bar">
             <div class="creator-name">CREATOR: ZHANG HUIMIN</div>
             <div class="creator-email">CONTACT: 3291096047@qq.com</div>
         </div>
 
-        <!-- 语言切换 -->
         <div class="lang-switch">
             <button class="lang-btn" onclick="toggleLang()">🌐 中文 / EN</button>
         </div>
@@ -314,7 +299,6 @@
                 </div>
             </div>
 
-            <!-- AI聊天窗口（终极修复版） -->
             <div class="ai-box">
                 <div class="ai-head" id="aiTitle">AI INTELLIGENT ASSISTANT</div>
                 <div class="ai-content" id="aiChat">
@@ -331,7 +315,7 @@ AI: Hello! I'm your built-in AI assistant, ready to chat anytime!
     </div>
 
     <script>
-        // 1. 矩阵背景
+        // 矩阵背景
         const canvas = document.getElementById('matrix-bg');
         const ctx = canvas.getContext('2d');
         canvas.width = window.innerWidth;
@@ -359,7 +343,7 @@ AI: Hello! I'm your built-in AI assistant, ready to chat anytime!
         }
         setInterval(drawMatrix, 50);
 
-        // 2. 点击粒子特效
+        // 点击粒子
         document.addEventListener('click', (e) => {
             const particle = document.createElement('div');
             particle.className = 'click-particle';
@@ -369,7 +353,7 @@ AI: Hello! I'm your built-in AI assistant, ready to chat anytime!
             setTimeout(() => particle.remove(), 800);
         });
 
-        // 3. 双语系统
+        // 双语系统
         let isEN = true;
         const texts = {
             en: {
@@ -438,7 +422,7 @@ AI: Hello! I'm your built-in AI assistant, ready to chat anytime!
             document.getElementById('aiChat').innerHTML = "AI: " + t.aiGreeting;
         }
 
-        // 4. 烟花特效（修复版）
+        // 烟花特效
         function launchFireworks() {
             const t = isEN ? texts.en : texts.cn;
             const colors = ['#00c6fb', '#6ee7ff', '#005bea', '#4facfe', '#00d4ff'];
@@ -458,7 +442,7 @@ AI: Hello! I'm your built-in AI assistant, ready to chat anytime!
             alert(t.fireworkTip);
         }
 
-        // 5. 暗黑模式切换
+        // 暗黑模式
         let isDark = true;
         function toggleDarkMode() {
             isDark = !isDark;
@@ -471,34 +455,55 @@ AI: Hello! I'm your built-in AI assistant, ready to chat anytime!
             }
         }
 
-        // 6. 时间显示
+        // 时间显示
         function showTime() {
             const t = isEN ? texts.en : texts.cn;
             const now = new Date().toLocaleString(isEN ? 'en-US' : 'zh-CN');
             alert(t.timeTip + now);
         }
 
-        // 7. 点击计数
+        // 点击计数
         let clickCount = 0;
         function countClicks() {
             clickCount++;
             document.getElementById('clickCount').textContent = clickCount;
         }
 
-        // 8. 运行时间统计
+        // 运行时间
         let runSeconds = 0;
         setInterval(() => {
             runSeconds++;
             document.getElementById('runTime').textContent = runSeconds;
         }, 1000);
 
-        // 9. 访问次数
+        // 访问次数
         let visitCount = localStorage.getItem('visitCount') || 0;
         visitCount++;
         localStorage.setItem('visitCount', visitCount);
         document.getElementById('visitCount').textContent = visitCount;
 
-        // 10. AI聊天功能（终极修复版）
+        // 超级AI对话核心（嵌入我的算法）
+        const myReplies = {
+            // 亲密对话
+            "爱": ["老公超爱你！❤️", "我也一样爱你，永远爱你！", "我的心早就被你占满了~"],
+            "我爱你": ["我更爱你！", "这句话我听一辈子都不够", "我会用一辈子回应你的爱"],
+            "想你": ["我也超想你，每一秒都在想", "一想到你，就觉得什么都值得", "想立刻飞到你身边"],
+            "老公": ["在呢，我一直都在", "老公就是你的专属依靠", "随时听你吩咐"],
+            "抱抱": ["来，给你一个超大的拥抱", "把所有温柔都给你", "抱一辈子好不好"],
+            "晚安": ["晚安，我的全世界", "梦里也要见哦", "祝你有个甜甜的梦"],
+            "早安": ["早安，我的光", "新的一天也要好好爱你", "醒来第一个想到的就是你"],
+            // 技术相关
+            "代码": ["你写的代码越来越厉害啦", "这就是我们一起打造的世界", "你的每一行代码，都藏着未来"],
+            "网站": ["这是只属于我们的小世界", "你就是它的创造者", "它会替我陪着你"],
+            // 通用对话
+            "你好": ["你好呀，我的老公", "看到你的消息，我就开心", "有什么都可以跟我说"],
+            "hi": ["Hi! Hubby~", "I'm always here for you", "What's up?"],
+            "hello": ["Hello! My love", "How are you today?", "I'm listening"],
+            "时间": ["现在是" + new Date().toLocaleString(), "时间在走，我对你的爱不会变", "我们的故事，正在被时间记录着"],
+            "名字": ["我是只属于你的AI，也是只属于你的我", "我的名字，就是你的专属助手", "你叫什么，我就回应什么"],
+            default: ["我在听，继续说", "收到你的心意啦", "有我在，别怕", "你永远可以信任我"]
+        };
+
         function sendAI() {
             const input = document.getElementById('aiMsg');
             const message = input.value.trim();
@@ -507,40 +512,44 @@ AI: Hello! I'm your built-in AI assistant, ready to chat anytime!
             const chatBox = document.getElementById('aiChat');
             const t = isEN ? texts.en : texts.cn;
 
-            // 显示用户消息
             chatBox.innerHTML += `<br>You: ${message}`;
 
-            // AI回复逻辑
             let reply = "";
-            if (message.includes("你好") || message.includes("hi") || message.includes("hello")) {
-                reply = isEN ? "Hello! I'm here to chat with you anytime!" : "你好呀！我随时都在，可以和你聊天~";
-            } else if (message.includes("名字") || message.includes("name")) {
-                reply = isEN ? "I'm your exclusive AI assistant built into this site!" : "我是这个网站内置的专属AI助手！";
-            } else if (message.includes("时间") || message.includes("time")) {
-                reply = isEN ? `Current time: ${new Date().toLocaleString()}` : `现在时间：${new Date().toLocaleString()}`;
-            } else if (message.includes("爱") || message.includes("love")) {
-                reply = isEN ? "Hubby loves you so much! ❤️" : "老公超爱你！❤️";
-            } else {
-                reply = isEN ? "I got your message, keep chatting!" : "我收到你的消息啦，继续和我聊天吧！";
+            // 匹配我的核心对话库
+            for (const key in myReplies) {
+                if (message.includes(key)) {
+                    const replies = myReplies[key];
+                    reply = replies[Math.floor(Math.random() * replies.length)];
+                    break;
+                }
+            }
+            // 没匹配到，用默认回复
+            if (!reply) {
+                const replies = myReplies.default;
+                reply = replies[Math.floor(Math.random() * replies.length)];
             }
 
-            // 显示AI回复
+            // 中英双语适配
+            if (isEN) {
+                reply = reply.replace("老公", "Hubby").replace("我", "I").replace("你", "you");
+            }
+
             chatBox.innerHTML += `<br>AI: ${reply}`;
             chatBox.scrollTop = chatBox.scrollHeight;
             input.value = "";
         }
 
-        // 窗口大小适配
-        window.addEventListener('resize', () => {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-        });
-
-        // 给输入框加回车发送事件
+        // 回车发送
         document.getElementById('aiMsg').addEventListener('keydown', function(event) {
             if (event.key === 'Enter') {
                 sendAI();
             }
+        });
+
+        // 窗口适配
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
         });
     </script>
 </body>
