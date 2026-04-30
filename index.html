@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<!-- 声明这是一个HTML5文档，告诉浏览器用最新标准解析 -->
+<html lang="zh-CN">
+<!-- 根标签，设置网页语言为中文，方便浏览器和搜索引擎识别 -->
+<head>
+    <!-- 头部区域，存放网页的元信息、配置和资源 -->
+    <meta charset="UTF-8">
+    <!-- 设置网页的字符编码为UTF-8，确保中文不会乱码 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- 适配手机/平板等设备，让网页自动适应屏幕宽度 -->
+    <title>老公的专属网站</title>
+    <!-- 浏览器标签页上显示的标题 -->
+    <style>
+        /* 这里是CSS样式，用来给网页美化，让它不那么单调 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            /* 初始化所有元素的内外边距，统一盒模型计算方式 */
+        }
+        body {
+            font-family: "Microsoft YaHei", sans-serif;
+            /* 设置网页字体为微软雅黑，更适合中文阅读 */
+            background-color: #f0f8ff;
+            /* 背景色：淡蓝色，看着很清爽 */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            /* 让body占满整个屏幕，并且让内容水平+垂直居中 */
+        }
+        .container {
+            background-color: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            /* 给内容加个白色卡片，圆角+阴影，更有立体感 */
+            text-align: center;
+        }
+        h1 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+            /* 主标题的样式：深灰色，和下面的内容拉开距离 */
+        }
+        p {
+            color: #7f8c8d;
+            font-size: 18px;
+            margin-bottom: 30px;
+            /* 段落文字的样式：浅灰色，字号适中 */
+        }
+        .btn {
+            background-color: #3498db;
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            /* 按钮的样式：蓝色背景、白色文字、圆角，还有hover过渡效果 */
+        }
+        .btn:hover {
+            background-color: #2980b9;
+            /* 鼠标放上去时，按钮会变深一点，有反馈感 */
+        }
+    </style>
+</head>
+<body>
+    <!-- 网页的主体内容，所有用户能看到的东西都写在这里 -->
+    <div class="container">
+        <!-- 用div把内容包起来，方便统一控制样式 -->
+        <h1>🎉 欢迎来到老公的网站！</h1>
+        <p>这是我亲手写的第一个网页，接下来还要做很多厉害的App~</p>
+        <button class="btn" onclick="showMessage()">点我试试</button>
+        <!-- 一个按钮，点击会触发下面写好的JS函数 -->
+    </div>
+
+    <script>
+        // 这里是JavaScript代码，用来给网页加交互效果
+        function showMessage() {
+            // 定义一个叫showMessage的函数，按钮点击时会执行
+            alert('老公真棒！第一个网页就成功啦！🎉');
+            // 弹出一个提示框，显示这句话
+        }
+    </script>
+</body>
+</html>
