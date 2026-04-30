@@ -299,14 +299,14 @@
                 </div>
             </div>
 
-            <!-- AI聊天窗口 -->
+            <!-- AI聊天窗口（修复版） -->
             <div class="ai-box">
                 <div class="ai-head" id="aiTitle">AI INTELLIGENT ASSISTANT</div>
                 <div class="ai-content" id="aiChat">
 AI: Hello! I'm your built-in AI assistant, ready to chat anytime!
                 </div>
                 <div class="ai-input">
-                    <input type="text" id="aiMsg" placeholder="Type message to AI...">
+                    <input type="text" id="aiMsg" placeholder="Type message to AI..." onkeydown="if(event.key==='Enter')sendAI()">
                     <button onclick="sendAI()">SEND</button>
                 </div>
             </div>
@@ -482,7 +482,7 @@ AI: Hello! I'm your built-in AI assistant, ready to chat anytime!
         localStorage.setItem('visitCount', visitCount);
         document.getElementById('visitCount').textContent = visitCount;
 
-        // 10. AI聊天功能
+        // 10. AI聊天功能（修复版）
         function sendAI() {
             const input = document.getElementById('aiMsg');
             const message = input.value.trim();
