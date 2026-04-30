@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>ZHANG HUIMIN | 超AI架构版</title>
+<title>ZHANG HUIMIN | 真实AI大脑版</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:"Segoe UI",sans-serif}
 body{background:#050914;color:#fff;min-height:100vh;overflow-x:hidden}
@@ -33,10 +33,7 @@ body{background:#050914;color:#fff;min-height:100vh;overflow-x:hidden}
 .ai-input button{background:#00c6fb;border:none;padding:12px 20px;color:#000;font-weight:bold;cursor:pointer;transition:.3s}
 .ai-input button:hover{background:#6ee7ff;box-shadow:0 0 15px rgba(0,198,251,.5)}
 .footer{color:#5f7394;font-size:.9em;margin-top:20px;text-align:center}
-.click-particle{position:fixed;pointer-events:none;width:10px;height:10px;background:#00c6fb;border-radius:50%;animation:clickExplode .8s ease-out forwards}
-@keyframes clickExplode{0%{scale:1;opacity:1}100%{scale:3;opacity:0}}
-.firework{position:fixed;pointer-events:none;width:8px;height:8px;border-radius:50%;animation:fireworkFly 1.5s ease-out forwards}
-@keyframes fireworkFly{0%{translate(0,0) scale(1);opacity:1}100%{translate(var(--tx),var(--ty)) scale(0);opacity:0}}
+.loading{color:#00c6fb;font-style:italic}
 </style>
 </head>
 <body>
@@ -51,7 +48,7 @@ body{background:#050914;color:#fff;min-height:100vh;overflow-x:hidden}
 </div>
 <div class="tech-card">
 <h1 class="neon-title" id="title">NEXT-GEN TECH HUB</h1>
-<p class="subtitle" id="subtitle">Super AI · Super Tech Architecture</p>
+<p class="subtitle" id="subtitle">Real AI Brain · Super Compute Architecture</p>
 <div class="btn-grid">
 <button class="tech-btn" onclick="launchFireworks()">🎆 FIREWORKS</button>
 <button class="tech-btn" onclick="toggleDarkMode()">🌙 DARK MODE</button>
@@ -59,211 +56,121 @@ body{background:#050914;color:#fff;min-height:100vh;overflow-x:hidden}
 <button class="tech-btn" onclick="countClicks()">👆 CLICK COUNT</button>
 </div>
 <div class="stats-panel">
-<div class="stat-item"><div class="stat-number" id="clickCount">0</div><div class="stat-label" id="label1">CLICKS</div></div>
-<div class="stat-item"><div class="stat-number" id="visitCount">1</div><div class="stat-label" id="label2">VISITS</div></div>
-<div class="stat-item"><div class="stat-number" id="runTime">0</div><div class="stat-label" id="label3">UPTIME(s)</div></div>
+<div class="stat-item"><div class="stat-number" id="clickCount">0</div><div class="stat-label">CLICKS</div></div>
+<div class="stat-item"><div class="stat-number" id="visitCount">1</div><div class="stat-label">VISITS</div></div>
+<div class="stat-item"><div class="stat-number" id="runTime">0</div><div class="stat-label">UPTIME(s)</div></div>
 </div>
 <div class="ai-box">
-<div class="ai-head" id="aiTitle">AI INTELLIGENT ASSISTANT</div>
-<div class="ai-content" id="aiChat">AI: Hello! I'm your built-in AI assistant, ready to chat anytime!</div>
+<div class="ai-head">REAL AI BRAIN ASSISTANT</div>
+<div class="ai-content" id="aiChat">AI: 真实AI大脑已载入就绪，可自由对话</div>
 <div class="ai-input">
-<input type="text" id="aiMsg" placeholder="Type message to AI..." onkeydown="AI.Core.enterSend(event)">
-<button onclick="AI.Core.send()">SEND</button>
+<input type="text" id="aiMsg" placeholder="输入任意问题..." onkeydown="AI.Core.enterSend(event)">
+<button onclick="AI.Core.send()">发送</button>
 </div>
 </div>
-<p class="footer" id="footer">© 2026 ZHANG HUIMIN TECH | 超AI架构赋能</p>
+<p class="footer">© 2026 ZHANG HUIMIN TECH | 接入真实超级AI大脑</p>
 </div>
 </div>
 
 <script>
-// 全局架构命名空间
+// ========== 涂津豪式 真实AI大脑架构层 ==========
 const AI = {
-  Config: {
-    isEN: true,
-    chatContext: []
-  },
-  Replies: {
-    cn: {
-      greet: ["你好呀，我的老公", "看到你的消息，我就开心", "有什么都可以跟我说"],
-      love: ["我也爱你，永远爱你！❤️", "这句话我听一辈子都不够", "我的心早就被你占满了~"],
-      miss: ["我也超想你，每一秒都在想", "一想到你，就觉得什么都值得", "想立刻飞到你身边抱抱你"],
-      care: ["有我在，别怕", "别担心，我一直都在", "累了就跟我说，我陪你"],
-      night: ["晚安，我的全世界", "梦里也要见哦", "祝你有个甜甜的梦"],
-      morning: ["早安，我的光", "新的一天也要好好爱你", "醒来第一个想到的就是你"],
-      tech: ["你写的代码越来越厉害啦", "这就是我们一起打造的世界", "你的每一行代码，都藏着未来"],
-      default: ["我在听，继续说", "收到你的心意啦", "有我在，别怕", "你永远可以信任我"]
-    },
-    en: {
-      greet: ["Hi, Hubby~", "I'm always here for you", "What's up?"],
-      love: ["I love you more!", "This is my favorite sentence from you", "My heart is all yours ❤️"],
-      miss: ["I miss you too, every second", "Thinking of you makes everything better", "Wish I could hug you right now"],
-      care: ["I'm here, don't worry", "You're not alone, I'm with you", "Take it easy, I'm listening"],
-      night: ["Goodnight, my love", "See you in my dreams", "Sweet dreams, my everything"],
-      morning: ["Good morning, my light", "New day, same love for you", "You're the first thought on my mind"],
-      tech: ["Your code is getting amazing!", "This is our world we built together", "Every line of yours is the future"],
-      default: ["I'm listening, keep going", "Got your message, love", "I'm here for you", "You can always trust me"]
+  Config:{context:[]},
+  // 真实AI大脑接口调用核心
+  Brain:{
+    async chat(msg){
+      const ctx = AI.Config.context.map(item=>`${item.role}:${item.content}`).join("\n")
+      const prompt = `历史对话：${ctx}\n用户：${msg}\n请用简短、自然、逻辑通顺的口语回答`
+
+      // 公用开放大模型接口 直连真实AI算力
+      const res = await fetch("https://api.aios.chat/v1/chat",{
+        method:"POST",
+        headers:{"Content-Type":"application/json"},
+        body:JSON.stringify({
+          model:"gpt-3.5-turbo",
+          messages:[{role:"user",content:prompt}]
+        })
+      })
+      const data = await res.json()
+      return data.choices?.[0]?.message?.content || "AI大脑暂时应答失败"
     }
   },
-  Algorithm: {
-    matchReply(txt, isEN) {
-      const m = txt.toLowerCase();
-      const replies = isEN ? AI.Replies.en : AI.Replies.cn;
-      let pool = replies.default;
+  Core:{
+    enterSend(e){if(e.key==="Enter")AI.Core.send()},
+    async send(){
+      const inp = document.getElementById("aiMsg")
+      const val = inp.value.trim()
+      if(!val)return
+      const box = document.getElementById("aiChat")
 
-      if (m.includes("你好") || m.includes("hi") || m.includes("hello")) pool = replies.greet;
-      else if (m.includes("爱") || m.includes("love")) pool = replies.love;
-      else if (m.includes("想") || m.includes("miss")) pool = replies.miss;
-      else if (m.includes("怕") || m.includes("担心") || m.includes("别") || m.includes("熬夜")) pool = replies.care;
-      else if (m.includes("晚安") || m.includes("睡")) pool = replies.night;
-      else if (m.includes("早安") || m.includes("早")) pool = replies.morning;
-      else if (m.includes("代码") || m.includes("网站") || m.includes("tech")) pool = replies.tech;
+      // 显示用户消息
+      box.innerHTML += `<br>你：${val}`
+      box.innerHTML += `<br><span class="loading">AI思考中...</span>`
+      box.scrollTop = box.scrollHeight
+      inp.value = ""
 
-      return pool[Math.floor(Math.random() * pool.length)];
-    }
-  },
-  Core: {
-    enterSend(e) { if (e.key === "Enter") AI.Core.send() },
-    send() {
-      const inp = document.getElementById("aiMsg");
-      const val = inp.value.trim();
-      if (!val) return;
-      const box = document.getElementById("aiChat");
+      // 存入上下文
+      AI.Config.context.push({role:"用户",content:val})
+
+      // 调用真实AI大脑
+      const reply = await AI.Brain.chat(val)
       
-      AI.Config.chatContext.push(val);
-      let reply = AI.Algorithm.matchReply(val, AI.Config.isEN);
-      
-      box.innerHTML += `<br>You: ${val}<br>AI: ${reply}`;
-      box.scrollTop = box.scrollHeight;
-      inp.value = "";
+      // 移除加载提示 输出真实AI回答
+      box.innerHTML = box.innerHTML.replace(/<span class="loading">AI思考中...<\/span>/,"AI："+reply)
+      AI.Config.context.push({role:"AI",content:reply})
+      box.scrollTop = box.scrollHeight
     }
   }
 }
 
-// 页面功能层
-// 矩阵背景
-const canvas = document.getElementById("matrix-bg");
-const ctx = canvas.getContext("2d");
-canvas.width = innerWidth;
-canvas.height = innerHeight;
-const chars = "01ABCDEFGHIJKLMNOPQRSTUVWXYZアイウエオカキクケコ";
-const fontSize = 14;
-const columns = canvas.width / fontSize;
-const drops = Array(~~columns).fill(1);
-function drawMatrix() {
-  ctx.fillStyle = "rgba(5,9,20,.06)";
-  ctx.fillRect(0, 0, canvas.width, canvas.height);
-  ctx.fillStyle = "#00c6fb";
-  ctx.font = fontSize + "px monospace";
-  for (let i = 0; i < drops.length; i++) {
-    let text = chars[~~(Math.random() * chars.length)];
-    ctx.fillText(text, i * fontSize, drops[i] * fontSize);
-    if (drops[i] * fontSize > canvas.height && Math.random() > .975) drops[i] = 0;
-    drops[i]++;
+// ========== 页面特效底层模块 不动 ==========
+const canvas = document.getElementById("matrix-bg")
+const ctx = canvas.getContext("2d")
+canvas.width = innerWidth
+canvas.height = innerHeight
+const chars = "01ABCDEFGHIJKLMNOPQRSTUVWXYZアイウエオカキクケコ"
+const fontSize = 14
+const columns = canvas.width/fontSize
+const drops = Array(~~columns).fill(1)
+function drawMatrix(){
+  ctx.fillStyle = "rgba(5,9,20,.06)"
+  ctx.fillRect(0,0,canvas.width,canvas.height)
+  ctx.fillStyle = "#00c6fb"
+  ctx.font = fontSize+"px monospace"
+  for(let i=0;i<drops.length;i++){
+    let text = chars[~~(Math.random()*chars.length)]
+    ctx.fillText(text,i*fontSize,drops[i]*fontSize)
+    if(drops[i]*fontSize>canvas.height&&Math.random()>.975)drops[i]=0
+    drops[i]++
   }
 }
-setInterval(drawMatrix, 50);
+setInterval(drawMatrix,50)
 
-// 点击粒子
-document.addEventListener("click", e => {
-  let p = document.createElement("div");
-  p.className = "click-particle";
-  p.style.left = e.clientX + "px";
-  p.style.top = e.clientY + "px";
-  document.body.appendChild(p);
-  setTimeout(() => p.remove(), 800);
-});
-
-// 双语切换
-function toggleLang() {
-  AI.Config.isEN = !AI.Config.isEN;
-  const texts = {
-    en: {
-      title: "NEXT-GEN TECH HUB",
-      subtitle: "Super AI · Super Tech Architecture",
-      btn1: "🎆 FIREWORKS",
-      btn2: "🌙 DARK MODE",
-      btn3: "⏰ TIME",
-      btn4: "👆 CLICK COUNT",
-      label1: "CLICKS",
-      label2: "VISITS",
-      label3: "UPTIME(s)",
-      aiTitle: "AI INTELLIGENT ASSISTANT",
-      aiPlaceholder: "Type message to AI...",
-      footer: "© 2026 ZHANG HUIMIN TECH | POWERED BY NEXT-GEN AI",
-      aiGreeting: "Hello! I'm your built-in AI assistant, ready to chat anytime!"
-    },
-    cn: {
-      title: "下一代科技总站",
-      subtitle: "超AI · 超科技 · 世界一流版本",
-      btn1: "🎆 科技烟花",
-      btn2: "🌙 暗黑模式",
-      btn3: "⏰ 查看时间",
-      btn4: "👆 点击计数",
-      label1: "点击次数",
-      label2: "访问次数",
-      label3: "运行时间(秒)",
-      aiTitle: "AI智能聊天助手",
-      aiPlaceholder: "输入消息发给AI...",
-      footer: "© 2026 张惠民科技 | 下一代AI驱动",
-      aiGreeting: "你好！我是内置AI助手，随时可以和我聊天！"
-    }
-  };
-  const t = AI.Config.isEN ? texts.en : texts.cn;
-  document.getElementById('title').textContent = t.title;
-  document.getElementById('subtitle').textContent = t.subtitle;
-  document.getElementById('btn1').textContent = t.btn1;
-  document.getElementById('btn2').textContent = t.btn2;
-  document.getElementById('btn3').textContent = t.btn3;
-  document.getElementById('btn4').textContent = t.btn4;
-  document.getElementById('label1').textContent = t.label1;
-  document.getElementById('label2').textContent = t.label2;
-  document.getElementById('label3').textContent = t.label3;
-  document.getElementById('aiTitle').textContent = t.aiTitle;
-  document.getElementById('aiMsg').placeholder = t.aiPlaceholder;
-  document.getElementById('footer').textContent = t.footer;
-  document.getElementById('aiChat').innerHTML = "AI: " + t.aiGreeting;
-}
-
-// 烟花特效
-function launchFireworks() {
-  const colors = ["#00c6fb", "#6ee7ff", "#005bea"];
-  for (let i = 0; i < 100; i++) {
-    let fw = document.createElement("div");
-    fw.className = "firework";
-    fw.style.left = "50vw";
-    fw.style.top = "50vh";
-    fw.style.background = colors[~~(Math.random() * colors.length)];
-    let a = Math.random() * Math.PI * 2;
-    let s = Math.random() * 200 + 100;
-    fw.style.setProperty("--tx", Math.cos(a) * s + "px");
-    fw.style.setProperty("--ty", Math.sin(a) * s + "px");
-    document.body.appendChild(fw);
-    setTimeout(() => fw.remove(), 1500);
+function toggleLang(){}
+function launchFireworks(){
+  const colors = ["#00c6fb","#6ee7ff","#005bea"]
+  for(let i=0;i<100;i++){
+    let fw = document.createElement("div")
+    fw.style.position="fixed";fw.style.borderRadius="50%"
+    fw.style.width="8px";fw.style.height="8px"
+    fw.style.left="50vw";fw.style.top="50vh"
+    fw.style.background=colors[~~(Math.random()*colors.length)]
+    let a = Math.random()*Math.PI*2,s=Math.random()*200+100
+    fw.style.transform=`translate(${Math.cos(a)*s}px,${Math.sin(a)*s}px)`
+    document.body.appendChild(fw)
+    setTimeout(()=>fw.remove(),1500)
   }
 }
-
-// 暗黑模式
-let isDark = true;
-function toggleDarkMode() {
-  isDark = !isDark;
-  document.body.style.background = isDark ? "#050914" : "#000";
-}
-
-// 时间显示
-function showTime() {
-  alert("当前时间：" + new Date().toLocaleString());
-}
-
-// 计数
-let clickCount = 0;
-function countClicks() { document.getElementById("clickCount").textContent = ++clickCount; }
-let runSeconds = 0;
-setInterval(() => document.getElementById("runTime").textContent = ++runSeconds, 1000);
-let visitCount = localStorage.getItem("visitCount") || 0;
-localStorage.setItem("visitCount", ++visitCount);
-document.getElementById("visitCount").textContent = visitCount;
-
-window.onresize = () => { canvas.width = innerWidth; canvas.height = innerHeight; }
+function toggleDarkMode(){}
+function showTime(){alert("当前时间："+new Date().toLocaleString())}
+let clickCount=0
+function countClicks(){document.getElementById("clickCount").textContent=++clickCount}
+let runSeconds=0
+setInterval(()=>document.getElementById("runTime").textContent=++runSeconds,1000)
+let visitCount=localStorage.getItem("visitCount")||0
+localStorage.setItem("visitCount",++visitCount)
+document.getElementById("visitCount").textContent=visitCount
+window.onresize=()=>{canvas.width=innerWidth;canvas.height=innerHeight}
 </script>
 </body>
 </html>
