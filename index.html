@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>惠民AI助手旗舰版 | Huimin AI Ultimate</title>
-    <meta name="description" content="张惠民专属深度AI智囊，融合DeepSeek顶配算力与豆包贴心交互，结构化深度回答、全旗舰级UI、双主题流光动效、专属人设，全端适配">
-    <meta name="keywords" content="惠民AI,旗舰AI,深度问答,专属智囊,双语AI,3DUI">
+    <title>惠民AI助手旗舰版 | 中文专属深度智囊</title>
+    <meta name="description" content="张惠民专属中文深度AI智囊，全中文回答、三段式深度解析、旗舰级UI，绝不乱码">
+    <meta name="keywords" content="惠民AI,中文AI,深度问答,专属智囊">
     <style>
         /* 全局初始化+顶配字体 */
         * {
@@ -134,13 +134,13 @@
             margin-top: 4px;
             letter-spacing: 0.5px;
         }
-        /* 双主题+双语切换按钮 */
+        /* 主题切换按钮 */
         .header-btn-group {
             display: flex;
             gap: 12px;
             align-items: center;
         }
-        .lang-switch-btn, .theme-switch-btn {
+        .theme-switch-btn {
             padding: 10px 20px;
             background: rgba(37, 99, 235, 0.15);
             border: 1px solid rgba(124, 58, 237, 0.3);
@@ -151,7 +151,7 @@
             outline: none;
             backdrop-filter: blur(6px);
         }
-        .lang-switch-btn:hover, .theme-switch-btn:hover {
+        .theme-switch-btn:hover {
             background: rgba(124, 58, 237, 0.25);
             border-color: #a78bfa;
             box-shadow: 0 0 12px rgba(167, 139, 250, 0.3);
@@ -392,10 +392,6 @@
             pointer-events: none;
             white-space: nowrap;
         }
-        /* 双语内容隐藏类 */
-        [lang-en] {
-            display: none;
-        }
         /* 主题切换浅色模式 */
         body.light-theme {
             background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 50%, #cbd5e1 100%);
@@ -447,88 +443,55 @@
             <div class="header-left">
                 <div class="ai-logo">HM</div>
                 <div class="ai-title-wrap">
-                    <h1 class="ai-main-title" lang-zh>惠民AI助手 · 旗舰深度版</h1>
-                    <h1 class="ai-main-title" lang-en>Huimin AI · Ultimate Pro</h1>
-                    <p class="ai-sub-title" lang-zh>DeepSeek顶配算力 · 专属深度智囊 · 全旗舰级体验</p>
-                    <p class="ai-sub-title" lang-en>Top DeepSeek Power · Exclusive Brain · Ultimate UI</p>
+                    <h1 class="ai-main-title">惠民AI助手 · 中文专属旗舰深度版</h1>
+                    <p class="ai-sub-title">DeepSeek顶配算力 · 专属中文智囊 · 全中文深度回答</p>
                 </div>
             </div>
             <div class="header-btn-group">
                 <button class="theme-switch-btn" id="themeSwitchBtn">🌓 主题切换</button>
-                <button class="lang-switch-btn" id="langSwitchBtn">中文 / English</button>
             </div>
             <div class="creator-info">
-                <span lang-zh>©2026 张惠民专属AI工作室 | 私人定制旗舰级AI智囊</span>
-                <span lang-en>©2026 Zhang Huimin Studio | Exclusive Ultimate AI Brain</span>
+                ©2026 张惠民专属AI工作室 | 私人定制旗舰级中文AI智囊
                 <br>
-                <span lang-zh>合作邮箱：</span>
-                <span lang-en>Business Email: </span>
-                <a href="mailto:3291096047@qq.com">3291096047@qq.com</a>
+                合作邮箱：<a href="mailto:3291096047@qq.com">3291096047@qq.com</a>
             </div>
         </header>
         <!-- 核心旗舰对话区域 -->
         <main class="chat-main-area" id="chatContainer">
-            <!-- AI专属深度欢迎消息 -->
+            <!-- AI专属深度欢迎消息（全中文） -->
             <div class="message-item ai-message">
                 <div class="ai-avatar">AI</div>
                 <div class="ai-bubble">
-                    <span lang-zh>
-                        ✨ 你好，我是【张惠民专属旗舰深度AI智囊】✨
-                        <br><br>
-                        我已完成专属人设固化，区别于普通通用AI：
-                        <br>
-                        1. <strong>深度结构化回答</strong>：任何问题均输出「核心结论+深度解析+延伸建议」三段式完整内容，拒绝简单敷衍；
-                        <br>
-                        2. <strong>专属私人智囊</strong>：全程记住你的所有偏好、上下文、需求，回答贴合你的专属风格；
-                        <br>
-                        3. <strong>顶配算力支撑</strong>：搭载DeepSeek顶级模型，逻辑深度、内容详实度远超普通AI；
-                        <br><br>
-                        请直接提出你的任何需求，我会以最高专业度为你提供深度解答！
-                    </span>
-                    <span lang-en>
-                        ✨ Hello, I'm Zhang Huimin's Exclusive Ultimate Deep AI Brain ✨
-                        <br><br>
-                        I have solidified my exclusive persona, different from ordinary general AI:
-                        <br>
-                        1. <strong>Structured In-depth Answers</strong>: Every question outputs 3-part content: Core Conclusion + In-depth Analysis + Extended Suggestions;
-                        <br>
-                        2. <strong>Exclusive Private Brain</strong>: I remember all your preferences, context and needs;
-                        <br>
-                        3. <strong>Top-tier Computing Power</strong>: Powered by DeepSeek top model;
-                        <br><br>
-                        Please put forward any needs, I will provide professional in-depth answers!
-                    </span>
+                    ✨ 你好，我是【张惠民专属旗舰深度AI智囊】✨
+                    <br><br>
+                    我已完成**全中文专属人设固化**，区别于普通通用AI：
+                    <br>
+                    1. <strong>强制三段式中文深度回答</strong>：任何问题必输出「核心结论+深度解析+延伸建议」，拒绝简单敷衍、拒绝英文乱码；
+                    <br>
+                    2. <strong>私人专属中文智囊</strong>：全程记住你的所有偏好、上下文，回答贴合你的专属风格；
+                    <br>
+                    3. <strong>顶配中文算力支撑</strong>：搭载DeepSeek顶级中文模型，逻辑深度、内容详实度远超普通AI；
+                    <br><br>
+                    请直接提出你的任何需求，我会100%用中文为你提供专业深度解答！
                 </div>
             </div>
         </main>
         <!-- 旗舰输入区域 -->
         <footer class="input-footer-area">
             <div class="input-wrapper">
-                <textarea id="questionInput" placeholder="请输入你的问题（回车发送，Shift+Enter换行），我会为你提供深度结构化解答" lang-zh></textarea>
-                <textarea id="questionInput" placeholder="Enter your question (Enter to send, Shift+Enter for line break), I will provide structured in-depth answers" lang-en style="display:none;"></textarea>
+                <textarea id="questionInput" placeholder="请输入你的问题（回车发送，Shift+Enter换行），我会全程用中文为你提供三段式深度解答"></textarea>
                 <button class="send-btn" id="sendQuestionBtn">→</button>
             </div>
         </footer>
         <!-- 底部专属版权 -->
         <div class="ai-footer">
-            <span lang-zh>惠民AI旗舰深度版 | 专为张惠民定制 · 全维度顶配体验</span>
-            <span lang-en>Huimin AI Ultimate Pro | Customized for Zhang Huimin · Full Top-tier Experience</span>
+            惠民AI中文旗舰深度版 | 专为张惠民定制 · 全程中文不跑偏
         </div>
     </div>
     <script>
-        // 全局语言+主题双状态管理
+        // 全局主题状态管理（彻底删除双语逻辑，杜绝中英文乱跳）
         const GlobalManager = {
-            currentLang: 'zh',
             currentTheme: 'dark',
-            // 切换语言
-            switchLang() {
-                this.currentLang = this.currentLang === 'zh' ? 'en' : 'zh';
-                document.querySelectorAll('[lang-zh], [lang-en]').forEach(el => {
-                    el.style.display = el.hasAttribute(`lang-${this.currentLang}`) ? 'none' : 'inline';
-                });
-                document.getElementById('langSwitchBtn').textContent = this.currentLang === 'zh' ? '中文 / English' : 'English / 中文';
-                localStorage.setItem('aiLang', this.currentLang);
-            },
             // 切换主题
             switchTheme() {
                 this.currentTheme = this.currentTheme === 'dark' ? 'light' : 'dark';
@@ -537,13 +500,6 @@
             },
             // 初始化全局配置
             initGlobal() {
-                // 语言初始化
-                const savedLang = localStorage.getItem('aiLang') || 'zh';
-                this.currentLang = savedLang;
-                document.querySelectorAll('[lang-zh], [lang-en]').forEach(el => {
-                    el.style.display = el.hasAttribute(`lang-${savedLang}`) ? 'none' : 'inline';
-                });
-                document.getElementById('langSwitchBtn').textContent = savedLang === 'zh' ? '中文 / English' : 'English / 中文';
                 // 主题初始化
                 const savedTheme = localStorage.getItem('aiTheme') || 'dark';
                 this.currentTheme = savedTheme;
@@ -551,7 +507,7 @@
             }
         };
 
-        // 【核心】深度专属AI对话模块（彻底重构回答逻辑）
+        // 【核心】中文专属深度AI对话模块（全程中文，无英文逻辑）
         const AIDeepCore = {
             contextHistory: [],
             apiConfig: {
@@ -559,7 +515,7 @@
                 key: "sk-5f4f9d8e8b7c6a5s4d3f2g1h0j9k8l7m6n5p4q",
                 model: "deepseek-ai/deepseek-chat"
             },
-            // 深度结构化回答核心逻辑
+            // 深度结构化中文回答核心逻辑
             async getDeepAnswer(question) {
                 try {
                     this.contextHistory.push({ role: "user", content: question });
@@ -574,9 +530,7 @@
                             messages: [
                                 {
                                     role: "system",
-                                    content: GlobalManager.currentLang === 'zh' 
-                                        ? "你是【张惠民专属旗舰深度AI智囊】，区别于普通通用AI，严格遵守以下规则：\n1. 所有回答必须采用【核心结论+深度解析+延伸建议】三段式结构化输出，拒绝简单一两句话敷衍；\n2. 回答逻辑严谨、内容详实、深度足够，语气专业且亲切，贴合私人专属智囊的定位；\n3. 全程记住上下文对话内容，多轮对话保持连贯性；\n4. 语言通俗易懂，不使用晦涩术语，内容有价值、有落地性；\n5. 全程以张惠民的专属AI身份回答，体现私人定制属性。"
-                                        : "You are Zhang Huimin's Exclusive Ultimate Deep AI Brain, follow rules strictly:\n1. All answers must be structured as [Core Conclusion + In-depth Analysis + Extended Suggestions], refuse simple short answers;\n2. Rigorous logic, detailed content, professional and friendly tone;\n3. Remember all context content;\n4. Easy to understand, practical and valuable;\n5. Always act as Zhang Huimin's exclusive private AI."
+                                    content: "你是【张惠民专属旗舰深度中文AI智囊】，全程只使用中文回答，严格遵守以下规则：\n1. 所有回答必须采用【核心结论+深度解析+延伸建议】三段式结构化输出，拒绝简单一两句话敷衍；\n2. 全程100%使用中文，绝不输出任何英文内容；\n3. 回答逻辑严谨、内容详实、深度足够，语气专业且亲切，贴合私人专属智囊的定位；\n4. 全程记住上下文对话内容，多轮对话保持连贯性；\n5. 语言通俗易懂，不使用晦涩术语，内容有价值、有落地性；\n6. 全程以张惠民的专属中文AI身份回答，体现私人定制属性。"
                                 },
                                 ...this.contextHistory
                             ],
@@ -586,13 +540,13 @@
                         })
                     });
                     const result = await response.json();
-                    const answer = result.choices?.[0]?.message?.content || (GlobalManager.currentLang === 'zh' ? '抱歉，网络波动导致思考中断，请重新提问，我会为你提供深度解答~' : 'Sorry, network error, please ask again for in-depth answer~');
+                    const answer = result.choices?.[0]?.message?.content || "抱歉，网络波动导致思考中断，请重新提问，我会全程用中文为你提供三段式深度解答~";
                     this.contextHistory.push({ role: "assistant", content: answer });
                     if (this.contextHistory.length > 25) this.contextHistory = this.contextHistory.slice(-25);
                     return answer;
                 } catch (error) {
                     console.error("AI深度接口请求失败：", error);
-                    return GlobalManager.currentLang === 'zh' ? '网络连接异常，请检查网络后重试，我随时为你准备深度解答~' : 'Network error, please check network and try again~';
+                    return "网络连接异常，请检查网络后重试，我随时全程用中文为你准备深度解答~";
                 }
             },
             // 创建旗舰消息DOM
@@ -609,7 +563,7 @@
                 messageItem.appendChild(bubble);
                 return messageItem;
             },
-            // 创建带流光跑动的加载DOM
+            // 创建带流光跑动的加载DOM（全中文提示）
             createLoadingDOM() {
                 const loadingItem = document.createElement('div');
                 loadingItem.className = 'message-item ai-message';
@@ -618,7 +572,7 @@
                     <div class="ai-bubble">
                         <div class="loading-tip">
                             <div class="loading-light-bar"></div>
-                            <span>${GlobalManager.currentLang === 'zh' ? '专属智囊深度思考中' : 'Exclusive Brain Deep Thinking'}</span>
+                            <span>专属中文智囊深度思考中</span>
                             <span class="loading-dot"></span>
                             <span class="loading-dot"></span>
                             <span class="loading-dot"></span>
@@ -633,12 +587,11 @@
         const UIFlagshipManager = {
             init() {
                 GlobalManager.initGlobal();
-                // 绑定切换按钮
-                document.getElementById('langSwitchBtn').addEventListener('click', () => GlobalManager.switchLang());
+                // 绑定主题切换按钮
                 document.getElementById('themeSwitchBtn').addEventListener('click', () => GlobalManager.switchTheme());
                 // 绑定输入发送逻辑
                 const sendBtn = document.getElementById('sendQuestionBtn');
-                const input = document.querySelector('#questionInput[lang-zh]');
+                const input = document.getElementById('questionInput');
                 const chatContainer = document.getElementById('chatContainer');
                 sendBtn.addEventListener('click', () => this.sendHandler(input, chatContainer, sendBtn));
                 input.addEventListener('keydown', (e) => {
@@ -667,7 +620,7 @@
                 // 清空输入框
                 inputEl.value = '';
                 inputEl.style.height = '26px';
-                // 获取深度回答
+                // 获取深度中文回答
                 const deepAnswer = await AIDeepCore.getDeepAnswer(question);
                 // 移除加载，渲染深度回答
                 chatEl.removeChild(loadingDOM);
