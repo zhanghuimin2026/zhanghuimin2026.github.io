@@ -3,232 +3,315 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>惠民AI助手 | Huimin AI Assistant</title>
-    <meta name="description" content="专业智能AI问答助手，融合DeepSeek强大算力与豆包贴心交互体验，支持多场景问题解答、多轮智能对话，全中文友好界面，双语自由切换">
-    <meta name="keywords" content="惠民AI,AI问答,智能助手,DeepSeek,豆包,双语AI,在线AI对话">
+    <title>惠民AI助手旗舰版 | Huimin AI Ultimate</title>
+    <meta name="description" content="张惠民专属深度AI智囊，融合DeepSeek顶配算力与豆包贴心交互，结构化深度回答、全旗舰级UI、双主题流光动效、专属人设，全端适配">
+    <meta name="keywords" content="惠民AI,旗舰AI,深度问答,专属智囊,双语AI,3DUI">
     <style>
-        /* 全局初始化与基础样式 */
+        /* 全局初始化+顶配字体 */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
             font-family: "Microsoft YaHei", "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-            transition: all 0.3s ease;
+            transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
         }
         body {
-            background: linear-gradient(135deg, #0b1224 0%, #141c3a 100%);
+            background: linear-gradient(135deg, #050a1f 0%, #0f173a 50%, #1a2349 100%);
             color: #e8edf3;
             min-height: 100vh;
             overflow-x: hidden;
-            line-height: 1.6;
+            line-height: 1.75;
+            position: relative;
         }
-        /* 滚动条美化 */
+        /* 全局浮动星光粒子背景 */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(circle 2px at 20px 30px, #a78bfa, transparent),
+                radial-gradient(circle 1px at 60px 70px, #93c5fd, transparent),
+                radial-gradient(circle 1.5px at 100px 20px, #bfdbfe, transparent),
+                radial-gradient(circle 2px at 140px 80px, #c4b5fd, transparent),
+                radial-gradient(circle 1px at 180px 40px, #e0e7ff, transparent);
+            background-size: 200px 200px;
+            animation: starFloat 60s linear infinite;
+            opacity: 0.3;
+            pointer-events: none;
+            z-index: 0;
+        }
+        @keyframes starFloat {
+            0% { background-position: 0% 0%; }
+            100% { background-position: 200px 200px; }
+        }
+        /* 滚动条顶配美化 */
         ::-webkit-scrollbar {
-            width: 6px;
-            height: 6px;
+            width: 8px;
+            height: 8px;
         }
         ::-webkit-scrollbar-thumb {
-            background: #3b4d7a;
-            border-radius: 3px;
+            background: linear-gradient(180deg, #2563eb, #7c3aed);
+            border-radius: 4px;
         }
         ::-webkit-scrollbar-track {
-            background: transparent;
+            background: rgba(15, 23, 58, 0.3);
         }
-        /* 容器布局 */
+        /* 主容器布局 */
         .ai-container {
-            max-width: 1000px;
+            max-width: 1100px;
             margin: 0 auto;
-            padding: 20px 15px;
+            padding: 25px 20px;
             display: flex;
             flex-direction: column;
             min-height: 100vh;
+            position: relative;
+            z-index: 1;
         }
-        /* 头部样式：标题+双语切换+创作者信息 */
+        /* 头部旗舰磨砂玻璃样式 */
         .ai-header {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 15px 0;
-            border-bottom: 1px solid rgba(59, 77, 122, 0.4);
-            margin-bottom: 25px;
+            padding: 20px 0;
+            border-bottom: 1px solid rgba(167, 139, 250, 0.25);
+            margin-bottom: 30px;
             flex-wrap: wrap;
-            gap: 15px;
+            gap: 20px;
+            background: rgba(15, 23, 58, 0.2);
+            backdrop-filter: blur(12px);
+            border-radius: 20px;
+            padding: 20px 25px;
+            box-shadow: 0 8px 32px rgba(37, 99, 235, 0.15);
         }
         .header-left {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 15px;
         }
+        /* 3D动态HM专属Logo */
         .ai-logo {
-            width: 40px;
-            height: 40px;
-            background: linear-gradient(135deg, #2563eb, #7c3aed);
-            border-radius: 10px;
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, #2563eb, #7c3aed, #a78bfa);
+            border-radius: 14px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 20px;
-            font-weight: bold;
+            font-size: 22px;
+            font-weight: 900;
             color: #fff;
+            box-shadow: 0 4px 15px rgba(124, 58, 237, 0.4);
+            animation: logoBreath 3s ease-in-out infinite alternate;
+            cursor: pointer;
+        }
+        .ai-logo:hover {
+            transform: rotate(8deg) scale(1.08);
+            box-shadow: 0 6px 20px rgba(124, 58, 237, 0.6);
+        }
+        @keyframes logoBreath {
+            from { box-shadow: 0 4px 15px rgba(124, 58, 237, 0.4); }
+            to { box-shadow: 0 4px 25px rgba(167, 139, 250, 0.6); }
         }
         .ai-title-wrap {
             display: flex;
             flex-direction: column;
         }
         .ai-main-title {
-            font-size: 24px;
-            font-weight: 700;
-            background: linear-gradient(90deg, #2563eb, #a78bfa);
+            font-size: 28px;
+            font-weight: 800;
+            background: linear-gradient(90deg, #2563eb, #7c3aed, #a78bfa);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
+            letter-spacing: 1px;
         }
         .ai-sub-title {
-            font-size: 12px;
+            font-size: 13px;
             color: #94a3b8;
-            margin-top: 2px;
+            margin-top: 4px;
+            letter-spacing: 0.5px;
         }
-        .lang-switch-btn {
-            padding: 8px 16px;
-            background: rgba(59, 77, 122, 0.3);
-            border: 1px solid #3b4d7a;
-            border-radius: 20px;
+        /* 双主题+双语切换按钮 */
+        .header-btn-group {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+        .lang-switch-btn, .theme-switch-btn {
+            padding: 10px 20px;
+            background: rgba(37, 99, 235, 0.15);
+            border: 1px solid rgba(124, 58, 237, 0.3);
+            border-radius: 25px;
             color: #e8edf3;
             font-size: 14px;
             cursor: pointer;
             outline: none;
+            backdrop-filter: blur(6px);
         }
-        .lang-switch-btn:hover {
-            background: rgba(37, 99, 235, 0.3);
-            border-color: #2563eb;
+        .lang-switch-btn:hover, .theme-switch-btn:hover {
+            background: rgba(124, 58, 237, 0.25);
+            border-color: #a78bfa;
+            box-shadow: 0 0 12px rgba(167, 139, 250, 0.3);
         }
         .creator-info {
             font-size: 12px;
             color: #94a3b8;
             text-align: right;
+            background: rgba(167, 139, 250, 0.1);
+            padding: 6px 12px;
+            border-radius: 12px;
         }
         .creator-info a {
-            color: #2563eb;
+            color: #a78bfa;
             text-decoration: none;
+            font-weight: 500;
         }
         .creator-info a:hover {
             text-decoration: underline;
+            color: #7c3aed;
         }
-        /* 对话区域核心样式 */
+        /* 核心对话区域-旗舰磨砂质感 */
         .chat-main-area {
             flex: 1;
             display: flex;
             flex-direction: column;
-            gap: 20px;
+            gap: 25px;
             overflow-y: auto;
-            padding-right: 8px;
-            margin-bottom: 25px;
+            padding-right: 10px;
+            margin-bottom: 30px;
+            min-height: 500px;
         }
-        /* 消息气泡通用样式 */
+        /* 消息气泡旗舰样式+上浮动画 */
         .message-item {
             display: flex;
-            max-width: 82%;
-            animation: fadeIn 0.4s ease forwards;
+            max-width: 85%;
+            animation: fadeInUp 0.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
             opacity: 0;
+            transform: translateY(15px);
         }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
+        @keyframes fadeInUp {
             to { opacity: 1; transform: translateY(0); }
         }
-        /* AI消息样式：左侧展示，仿豆包温和质感 */
+        /* AI消息-左侧旗舰磨砂玻璃 */
         .ai-message {
             align-self: flex-start;
             flex-direction: row;
-            gap: 12px;
+            gap: 15px;
         }
         .ai-avatar {
-            width: 36px;
-            height: 36px;
+            width: 42px;
+            height: 42px;
             background: linear-gradient(135deg, #2563eb, #7c3aed);
             border-radius: 50%;
             flex-shrink: 0;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 16px;
+            font-size: 18px;
             font-weight: bold;
             color: #fff;
+            box-shadow: 0 3px 10px rgba(124, 58, 237, 0.3);
         }
         .ai-bubble {
-            background: rgba(30, 41, 59, 0.8);
-            border: 1px solid rgba(59, 77, 122, 0.4);
-            border-radius: 18px 18px 18px 4px;
-            padding: 14px 18px;
+            background: rgba(30, 41, 59, 0.6);
+            border: 1px solid rgba(167, 139, 250, 0.3);
+            border-radius: 20px 20px 20px 6px;
+            padding: 18px 22px;
             font-size: 15px;
             color: #e2e8f0;
-            backdrop-filter: blur(4px);
-            line-height: 1.7;
+            backdrop-filter: blur(10px);
+            line-height: 1.8;
+            box-shadow: 0 6px 20px rgba(15, 23, 58, 0.25);
         }
-        /* 用户消息样式：右侧展示，仿DeepSeek简洁风格 */
+        /* 用户消息-右侧渐变旗舰气泡 */
         .user-message {
             align-self: flex-end;
             flex-direction: row-reverse;
-            gap: 12px;
+            gap: 15px;
         }
         .user-avatar {
-            width: 36px;
-            height: 36px;
+            width: 42px;
+            height: 42px;
             background: linear-gradient(135deg, #1d4ed8, #3b82f6);
             border-radius: 50%;
             flex-shrink: 0;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 16px;
+            font-size: 18px;
             font-weight: bold;
             color: #fff;
+            box-shadow: 0 3px 10px rgba(37, 99, 235, 0.3);
         }
         .user-bubble {
             background: linear-gradient(135deg, #2563eb, #3b82f6);
-            border-radius: 18px 18px 4px 18px;
-            padding: 14px 18px;
+            border-radius: 20px 20px 6px 20px;
+            padding: 18px 22px;
             font-size: 15px;
             color: #ffffff;
-            line-height: 1.7;
+            line-height: 1.8;
+            box-shadow: 0 6px 20px rgba(37, 99, 235, 0.25);
         }
-        /* 加载状态样式 */
+        /* AI思考加载-流光跑动进度条（核心光效） */
         .loading-tip {
-            color: #93c5fd;
-            font-style: italic;
+            color: #a78bfa;
+            font-style: normal;
             display: flex;
             align-items: center;
-            gap: 6px;
+            gap: 10px;
+            position: relative;
+            overflow: hidden;
+        }
+        /* 向右跑动的流光条 */
+        .loading-light-bar {
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(167, 139, 250, 0.4), transparent);
+            animation: lightRun 2s linear infinite;
+        }
+        @keyframes lightRun {
+            0% { left: -100%; }
+            100% { left: 100%; }
         }
         .loading-dot {
-            width: 4px;
-            height: 4px;
-            background: #93c5fd;
+            width: 5px;
+            height: 5px;
+            background: #a78bfa;
             border-radius: 50%;
-            animation: dotJump 1s infinite alternate;
+            animation: dotJump 1.2s infinite alternate;
         }
-        .loading-dot:nth-child(2) { animation-delay: 0.2s; }
-        .loading-dot:nth-child(3) { animation-delay: 0.4s; }
+        .loading-dot:nth-child(2) { animation-delay: 0.25s; }
+        .loading-dot:nth-child(3) { animation-delay: 0.5s; }
         @keyframes dotJump {
             from { transform: translateY(0); }
-            to { transform: translateY(-6px); }
+            to { transform: translateY(-8px); }
         }
-        /* 输入区域样式 */
+        /* 输入区域-旗舰磨砂玻璃 */
         .input-footer-area {
             position: sticky;
             bottom: 0;
-            background: rgba(11, 18, 36, 0.9);
-            backdrop-filter: blur(8px);
-            padding: 15px 0;
-            border-top: 1px solid rgba(59, 77, 122, 0.4);
+            background: rgba(15, 23, 58, 0.3);
+            backdrop-filter: blur(15px);
+            padding: 20px 0;
+            border-top: 1px solid rgba(167, 139, 250, 0.2);
+            border-radius: 20px 20px 0 0;
+            margin-top: 20px;
         }
         .input-wrapper {
             display: flex;
             align-items: center;
-            gap: 12px;
-            background: rgba(30, 41, 59, 0.7);
-            border: 1px solid #3b4d7a;
-            border-radius: 24px;
-            padding: 10px 16px;
+            gap: 15px;
+            background: rgba(30, 41, 59, 0.5);
+            border: 1px solid rgba(124, 58, 237, 0.3);
+            border-radius: 28px;
+            padding: 12px 20px;
+            box-shadow: 0 4px 15px rgba(15, 23, 58, 0.2);
         }
         #questionInput {
             flex: 1;
@@ -237,32 +320,49 @@
             outline: none;
             color: #e8edf3;
             font-size: 15px;
-            padding: 8px 0;
+            padding: 10px 0;
             resize: none;
-            height: 24px;
-            max-height: 120px;
+            height: 26px;
+            max-height: 150px;
             overflow-y: auto;
         }
         #questionInput::placeholder {
             color: #64748b;
         }
+        /* 发送按钮-流光悬浮效果 */
         .send-btn {
-            width: 40px;
-            height: 40px;
-            background: linear-gradient(135deg, #2563eb, #3b82f6);
+            width: 46px;
+            height: 46px;
+            background: linear-gradient(135deg, #2563eb, #7c3aed);
             border: none;
             border-radius: 50%;
             color: #fff;
-            font-size: 18px;
+            font-size: 20px;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
             flex-shrink: 0;
+            box-shadow: 0 3px 12px rgba(124, 58, 237, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+        .send-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.6s ease;
+        }
+        .send-btn:hover::before {
+            left: 100%;
         }
         .send-btn:hover {
-            transform: scale(1.05);
-            box-shadow: 0 0 12px rgba(37, 99, 235, 0.4);
+            transform: scale(1.08);
+            box-shadow: 0 5px 20px rgba(124, 58, 237, 0.5);
         }
         .send-btn:disabled {
             background: #334155;
@@ -270,87 +370,157 @@
             transform: none;
             box-shadow: none;
         }
-        /* 底部版权信息 */
+        /* 底部专属版权+水印 */
         .ai-footer {
             text-align: center;
-            padding: 12px 0;
-            font-size: 12px;
+            padding: 15px 0;
+            font-size: 13px;
             color: #64748b;
-            border-top: 1px solid rgba(59, 77, 122, 0.2);
+            border-top: 1px solid rgba(167, 139, 250, 0.15);
+            margin-top: 10px;
+            position: relative;
+        }
+        .ai-footer::before {
+            content: '惠民AI · 张惠民专属工作室';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 40px;
+            font-weight: 900;
+            color: rgba(167, 139, 250, 0.05);
+            pointer-events: none;
+            white-space: nowrap;
         }
         /* 双语内容隐藏类 */
         [lang-en] {
             display: none;
         }
-        /* 响应式适配 */
+        /* 主题切换浅色模式 */
+        body.light-theme {
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 50%, #cbd5e1 100%);
+            color: #1e293b;
+        }
+        body.light-theme .ai-bubble {
+            background: rgba(255,255,255,0.7);
+            border: 1px solid rgba(124, 58, 237, 0.2);
+            color: #334155;
+        }
+        body.light-theme .input-wrapper {
+            background: rgba(255,255,255,0.8);
+        }
+        body.light-theme #questionInput {
+            color: #334155;
+        }
+        /* 响应式顶配适配 */
         @media (max-width: 768px) {
             .ai-main-title {
-                font-size: 20px;
+                font-size: 24px;
             }
             .message-item {
-                max-width: 90%;
+                max-width: 92%;
             }
             .ai-header {
                 flex-direction: column;
                 align-items: flex-start;
+                padding: 18px;
+            }
+            .header-btn-group {
+                width: 100%;
+                justify-content: space-between;
             }
             .creator-info {
                 text-align: left;
                 width: 100%;
+            }
+            .ai-logo {
+                width: 44px;
+                height: 44px;
             }
         }
     </style>
 </head>
 <body>
     <div class="ai-container">
-        <!-- 头部区域：标题、双语切换、创作者信息 -->
+        <!-- 头部旗舰区域 -->
         <header class="ai-header">
             <div class="header-left">
                 <div class="ai-logo">HM</div>
                 <div class="ai-title-wrap">
-                    <h1 class="ai-main-title" lang-zh>惠民AI助手</h1>
-                    <h1 class="ai-main-title" lang-en>Huimin AI</h1>
-                    <p class="ai-sub-title" lang-zh>DeepSeek算力·豆包体验·智能问答</p>
-                    <p class="ai-sub-title" lang-en>DeepSeek Power · Doubao Experience · Smart Chat</p>
+                    <h1 class="ai-main-title" lang-zh>惠民AI助手 · 旗舰深度版</h1>
+                    <h1 class="ai-main-title" lang-en>Huimin AI · Ultimate Pro</h1>
+                    <p class="ai-sub-title" lang-zh>DeepSeek顶配算力 · 专属深度智囊 · 全旗舰级体验</p>
+                    <p class="ai-sub-title" lang-en>Top DeepSeek Power · Exclusive Brain · Ultimate UI</p>
                 </div>
             </div>
-            <button class="lang-switch-btn" id="langSwitchBtn">中文 / English</button>
+            <div class="header-btn-group">
+                <button class="theme-switch-btn" id="themeSwitchBtn">🌓 主题切换</button>
+                <button class="lang-switch-btn" id="langSwitchBtn">中文 / English</button>
+            </div>
             <div class="creator-info">
-                <span lang-zh>创作者邮箱：</span>
-                <span lang-en>Creator Email: </span>
+                <span lang-zh>©2026 张惠民专属AI工作室 | 私人定制旗舰级AI智囊</span>
+                <span lang-en>©2026 Zhang Huimin Studio | Exclusive Ultimate AI Brain</span>
+                <br>
+                <span lang-zh>合作邮箱：</span>
+                <span lang-en>Business Email: </span>
                 <a href="mailto:3291096047@qq.com">3291096047@qq.com</a>
             </div>
         </header>
-        <!-- 核心对话区域 -->
+        <!-- 核心旗舰对话区域 -->
         <main class="chat-main-area" id="chatContainer">
-            <!-- AI初始欢迎消息 -->
+            <!-- AI专属深度欢迎消息 -->
             <div class="message-item ai-message">
                 <div class="ai-avatar">AI</div>
                 <div class="ai-bubble">
-                    <span lang-zh>你好！我是惠民AI助手，融合DeepSeek强大算法算力与豆包贴心交互体验，可解答各类知识问题、提供生活建议、辅助学习工作、陪你轻松聊天，有任何问题都可以随时问我哦</span>
-                    <span lang-en>Hello! I'm Huimin AI Assistant, integrating DeepSeek's powerful algorithm computing power and Doubao's intimate interactive experience. I can answer various knowledge questions, provide life advice, assist with study and work, and chat with you easily. Feel free to ask me anything~</span>
+                    <span lang-zh>
+                        ✨ 你好，我是【张惠民专属旗舰深度AI智囊】✨
+                        <br><br>
+                        我已完成专属人设固化，区别于普通通用AI：
+                        <br>
+                        1. <strong>深度结构化回答</strong>：任何问题均输出「核心结论+深度解析+延伸建议」三段式完整内容，拒绝简单敷衍；
+                        <br>
+                        2. <strong>专属私人智囊</strong>：全程记住你的所有偏好、上下文、需求，回答贴合你的专属风格；
+                        <br>
+                        3. <strong>顶配算力支撑</strong>：搭载DeepSeek顶级模型，逻辑深度、内容详实度远超普通AI；
+                        <br><br>
+                        请直接提出你的任何需求，我会以最高专业度为你提供深度解答！
+                    </span>
+                    <span lang-en>
+                        ✨ Hello, I'm Zhang Huimin's Exclusive Ultimate Deep AI Brain ✨
+                        <br><br>
+                        I have solidified my exclusive persona, different from ordinary general AI:
+                        <br>
+                        1. <strong>Structured In-depth Answers</strong>: Every question outputs 3-part content: Core Conclusion + In-depth Analysis + Extended Suggestions;
+                        <br>
+                        2. <strong>Exclusive Private Brain</strong>: I remember all your preferences, context and needs;
+                        <br>
+                        3. <strong>Top-tier Computing Power</strong>: Powered by DeepSeek top model;
+                        <br><br>
+                        Please put forward any needs, I will provide professional in-depth answers!
+                    </span>
                 </div>
             </div>
         </main>
-        <!-- 输入区域 -->
+        <!-- 旗舰输入区域 -->
         <footer class="input-footer-area">
             <div class="input-wrapper">
-                <textarea id="questionInput" placeholder="请输入你的问题，按Enter发送，Shift+Enter换行" lang-zh></textarea>
-                <textarea id="questionInput" placeholder="Enter your question, press Enter to send, Shift+Enter for line break" lang-en style="display:none;"></textarea>
+                <textarea id="questionInput" placeholder="请输入你的问题（回车发送，Shift+Enter换行），我会为你提供深度结构化解答" lang-zh></textarea>
+                <textarea id="questionInput" placeholder="Enter your question (Enter to send, Shift+Enter for line break), I will provide structured in-depth answers" lang-en style="display:none;"></textarea>
                 <button class="send-btn" id="sendQuestionBtn">→</button>
             </div>
         </footer>
-        <!-- 底部版权 -->
+        <!-- 底部专属版权 -->
         <div class="ai-footer">
-            <span lang-zh>©2026 张惠民 专属AI工作室 | 所有回答由AI智能生成，仅供参考</span>
-            <span lang-en>©2026 Zhang Huimin Exclusive AI Studio | All answers generated by AI, for reference only</span>
+            <span lang-zh>惠民AI旗舰深度版 | 专为张惠民定制 · 全维度顶配体验</span>
+            <span lang-en>Huimin AI Ultimate Pro | Customized for Zhang Huimin · Full Top-tier Experience</span>
         </div>
     </div>
     <script>
-        // 全局语言状态管理
-        const LangManager = {
-            currentLang: 'zh', // 默认中文
-            // 切换语言方法
+        // 全局语言+主题双状态管理
+        const GlobalManager = {
+            currentLang: 'zh',
+            currentTheme: 'dark',
+            // 切换语言
             switchLang() {
                 this.currentLang = this.currentLang === 'zh' ? 'en' : 'zh';
                 document.querySelectorAll('[lang-zh], [lang-en]').forEach(el => {
@@ -359,29 +529,39 @@
                 document.getElementById('langSwitchBtn').textContent = this.currentLang === 'zh' ? '中文 / English' : 'English / 中文';
                 localStorage.setItem('aiLang', this.currentLang);
             },
-            // 初始化语言
-            initLang() {
+            // 切换主题
+            switchTheme() {
+                this.currentTheme = this.currentTheme === 'dark' ? 'light' : 'dark';
+                document.body.classList.toggle('light-theme', this.currentTheme === 'light');
+                localStorage.setItem('aiTheme', this.currentTheme);
+            },
+            // 初始化全局配置
+            initGlobal() {
+                // 语言初始化
                 const savedLang = localStorage.getItem('aiLang') || 'zh';
                 this.currentLang = savedLang;
                 document.querySelectorAll('[lang-zh], [lang-en]').forEach(el => {
                     el.style.display = el.hasAttribute(`lang-${savedLang}`) ? 'none' : 'inline';
                 });
                 document.getElementById('langSwitchBtn').textContent = savedLang === 'zh' ? '中文 / English' : 'English / 中文';
+                // 主题初始化
+                const savedTheme = localStorage.getItem('aiTheme') || 'dark';
+                this.currentTheme = savedTheme;
+                document.body.classList.toggle('light-theme', savedTheme === 'light');
             }
         };
 
-        // AI核心对话模块：DeepSeek接口对接+上下文记忆+问答逻辑
-        const AIChatCore = {
-            contextHistory: [], // 对话上下文记忆
+        // 【核心】深度专属AI对话模块（彻底重构回答逻辑）
+        const AIDeepCore = {
+            contextHistory: [],
             apiConfig: {
                 url: "https://api.siliconflow.cn/v1/chat/completions",
                 key: "sk-5f4f9d8e8b7c6a5s4d3f2g1h0j9k8l7m6n5p4q",
                 model: "deepseek-ai/deepseek-chat"
             },
-            // 发送问题获取AI回答
-            async getAIAnswer(question) {
+            // 深度结构化回答核心逻辑
+            async getDeepAnswer(question) {
                 try {
-                    // 添加上下文记忆
                     this.contextHistory.push({ role: "user", content: question });
                     const response = await fetch(this.apiConfig.url, {
                         method: "POST",
@@ -394,29 +574,28 @@
                             messages: [
                                 {
                                     role: "system",
-                                    content: LangManager.currentLang === 'zh' 
-                                        ? "你是惠民AI助手，需结合DeepSeek精准算力与豆包温和交互风格，回答问题逻辑清晰、内容详实、语气亲切，无违规内容，优先解答用户核心问题，多轮对话保持上下文记忆，语言通俗易懂。"
-                                        : "You are Huimin AI Assistant, combining DeepSeek's precise computing power and Doubao's gentle interactive style. Answer questions clearly, detailed and friendly, no illegal content, prioritize core user questions, maintain context in multi-round conversations, use easy-to-understand language."
+                                    content: GlobalManager.currentLang === 'zh' 
+                                        ? "你是【张惠民专属旗舰深度AI智囊】，区别于普通通用AI，严格遵守以下规则：\n1. 所有回答必须采用【核心结论+深度解析+延伸建议】三段式结构化输出，拒绝简单一两句话敷衍；\n2. 回答逻辑严谨、内容详实、深度足够，语气专业且亲切，贴合私人专属智囊的定位；\n3. 全程记住上下文对话内容，多轮对话保持连贯性；\n4. 语言通俗易懂，不使用晦涩术语，内容有价值、有落地性；\n5. 全程以张惠民的专属AI身份回答，体现私人定制属性。"
+                                        : "You are Zhang Huimin's Exclusive Ultimate Deep AI Brain, follow rules strictly:\n1. All answers must be structured as [Core Conclusion + In-depth Analysis + Extended Suggestions], refuse simple short answers;\n2. Rigorous logic, detailed content, professional and friendly tone;\n3. Remember all context content;\n4. Easy to understand, practical and valuable;\n5. Always act as Zhang Huimin's exclusive private AI."
                                 },
                                 ...this.contextHistory
                             ],
-                            temperature: 0.7,
-                            max_tokens: 1500,
+                            temperature: 0.6,
+                            max_tokens: 2500,
                             top_p: 0.9
                         })
                     });
                     const result = await response.json();
-                    const answer = result.choices?.[0]?.message?.content || (LangManager.currentLang === 'zh' ? '抱歉，我暂时无法解答这个问题，请换个问题试试~' : 'Sorry, I can\'t answer this question temporarily, please try another one~');
+                    const answer = result.choices?.[0]?.message?.content || (GlobalManager.currentLang === 'zh' ? '抱歉，网络波动导致思考中断，请重新提问，我会为你提供深度解答~' : 'Sorry, network error, please ask again for in-depth answer~');
                     this.contextHistory.push({ role: "assistant", content: answer });
-                    // 限制上下文长度，避免内存溢出
-                    if (this.contextHistory.length > 20) this.contextHistory = this.contextHistory.slice(-20);
+                    if (this.contextHistory.length > 25) this.contextHistory = this.contextHistory.slice(-25);
                     return answer;
                 } catch (error) {
-                    console.error("AI接口请求失败：", error);
-                    return LangManager.currentLang === 'zh' ? '网络连接异常，请检查网络后重试~' : 'Network connection error, please check your network and try again~';
+                    console.error("AI深度接口请求失败：", error);
+                    return GlobalManager.currentLang === 'zh' ? '网络连接异常，请检查网络后重试，我随时为你准备深度解答~' : 'Network error, please check network and try again~';
                 }
             },
-            // 创建消息DOM
+            // 创建旗舰消息DOM
             createMessageDOM(role, content) {
                 const messageItem = document.createElement('div');
                 messageItem.className = `message-item ${role === 'ai' ? 'ai-message' : 'user-message'}`;
@@ -425,13 +604,12 @@
                 avatar.textContent = role === 'ai' ? 'AI' : '我';
                 const bubble = document.createElement('div');
                 bubble.className = role === 'ai' ? 'ai-bubble' : 'user-bubble';
-                // 处理换行
                 bubble.innerHTML = content.replace(/\n/g, '<br>');
                 messageItem.appendChild(avatar);
                 messageItem.appendChild(bubble);
                 return messageItem;
             },
-            // 创建加载中DOM
+            // 创建带流光跑动的加载DOM
             createLoadingDOM() {
                 const loadingItem = document.createElement('div');
                 loadingItem.className = 'message-item ai-message';
@@ -439,7 +617,8 @@
                     <div class="ai-avatar">AI</div>
                     <div class="ai-bubble">
                         <div class="loading-tip">
-                            <span>${LangManager.currentLang === 'zh' ? '正在思考' : 'Thinking'}</span>
+                            <div class="loading-light-bar"></div>
+                            <span>${GlobalManager.currentLang === 'zh' ? '专属智囊深度思考中' : 'Exclusive Brain Deep Thinking'}</span>
                             <span class="loading-dot"></span>
                             <span class="loading-dot"></span>
                             <span class="loading-dot"></span>
@@ -450,26 +629,22 @@
             }
         };
 
-        // 页面交互事件绑定
-        const UIManager = {
+        // 旗舰级UI交互管理
+        const UIFlagshipManager = {
             init() {
-                // 语言初始化
-                LangManager.initLang();
-                // 语言切换按钮事件
-                document.getElementById('langSwitchBtn').addEventListener('click', () => {
-                    LangManager.switchLang();
-                });
-                // 发送按钮事件
+                GlobalManager.initGlobal();
+                // 绑定切换按钮
+                document.getElementById('langSwitchBtn').addEventListener('click', () => GlobalManager.switchLang());
+                document.getElementById('themeSwitchBtn').addEventListener('click', () => GlobalManager.switchTheme());
+                // 绑定输入发送逻辑
                 const sendBtn = document.getElementById('sendQuestionBtn');
                 const input = document.querySelector('#questionInput[lang-zh]');
                 const chatContainer = document.getElementById('chatContainer');
-                // 点击发送
-                sendBtn.addEventListener('click', () => this.sendQuestionHandler(input, chatContainer, sendBtn));
-                // 回车发送，Shift+Enter换行
+                sendBtn.addEventListener('click', () => this.sendHandler(input, chatContainer, sendBtn));
                 input.addEventListener('keydown', (e) => {
                     if (e.key === 'Enter' && !e.shiftKey) {
                         e.preventDefault();
-                        this.sendQuestionHandler(input, chatContainer, sendBtn);
+                        this.sendHandler(input, chatContainer, sendBtn);
                     }
                 });
                 // 输入框自适应高度
@@ -478,39 +653,34 @@
                     input.style.height = input.scrollHeight + 'px';
                 });
             },
-            // 发送问题处理逻辑
-            async sendQuestionHandler(inputEl, chatEl, btnEl) {
+            async sendHandler(inputEl, chatEl, btnEl) {
                 const question = inputEl.value.trim();
                 if (!question) return;
-                // 禁用按钮，防止重复发送
                 btnEl.disabled = true;
                 // 渲染用户消息
-                const userMsgDOM = AIChatCore.createMessageDOM('user', question);
-                chatEl.appendChild(userMsgDOM);
-                // 渲染加载状态
-                const loadingDOM = AIChatCore.createLoadingDOM();
+                const userMsg = AIDeepCore.createMessageDOM('user', question);
+                chatEl.appendChild(userMsg);
+                // 渲染流光加载状态
+                const loadingDOM = AIDeepCore.createLoadingDOM();
                 chatEl.appendChild(loadingDOM);
-                // 滚动到底部
                 chatEl.scrollTop = chatEl.scrollHeight;
                 // 清空输入框
                 inputEl.value = '';
-                inputEl.style.height = '24px';
-                // 获取AI回答
-                const answer = await AIChatCore.getAIAnswer(question);
-                // 移除加载状态，渲染AI回答
+                inputEl.style.height = '26px';
+                // 获取深度回答
+                const deepAnswer = await AIDeepCore.getDeepAnswer(question);
+                // 移除加载，渲染深度回答
                 chatEl.removeChild(loadingDOM);
-                const aiMsgDOM = AIChatCore.createMessageDOM('ai', answer);
-                chatEl.appendChild(aiMsgDOM);
-                // 滚动到底部
+                const aiMsg = AIDeepCore.createMessageDOM('ai', deepAnswer);
+                chatEl.appendChild(aiMsg);
                 chatEl.scrollTop = chatEl.scrollHeight;
-                // 启用按钮
                 btnEl.disabled = false;
             }
         };
 
         // 页面加载完成初始化
         window.addEventListener('DOMContentLoaded', () => {
-            UIManager.init();
+            UIFlagshipManager.init();
         });
     </script>
 </body>
